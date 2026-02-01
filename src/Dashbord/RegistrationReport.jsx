@@ -69,7 +69,7 @@
 //         return;
 //       }
 
-//       const response = await axios.get('https://api.gtnworld.live/api/SuperAdmin/company-transactions', {
+//       const response = await axios.get('http://api.gtnworld.live/api/SuperAdmin/company-transactions', {
 //         headers: { Authorization: `Bearer ${token}` }
 //       });
 

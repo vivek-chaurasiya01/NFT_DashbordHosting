@@ -1,6 +1,6 @@
 // API Configuration
 const API_CONFIG = {
-  BASE_URL: import.meta.env.VITE_API_BASE_URL || "https://api.gtnworld.live",
+  BASE_URL: import.meta.env.VITE_API_BASE_URL || "http://api.gtnworld.live",
   VERSION: import.meta.env.VITE_API_VERSION || "api",
 };
 

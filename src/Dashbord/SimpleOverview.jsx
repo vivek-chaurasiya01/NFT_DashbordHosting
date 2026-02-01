@@ -22,7 +22,7 @@
 //       if (!token) return;
 
 //       const response = await axios.get(
-//         "https://api.gtnworld.live/api/admin/company-transactions",
+//         "http://api.gtnworld.live/api/admin/company-transactions",
 //         { headers: { Authorization: `Bearer ${token}` } }
 //       );
 

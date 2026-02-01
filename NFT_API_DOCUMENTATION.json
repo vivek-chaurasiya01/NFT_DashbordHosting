@@ -2,7 +2,7 @@
   "nft_api_documentation": {
     "title": "Complete NFT Management API Documentation",
     "version": "1.0.0",
-    "base_url": "https://api.gtnworld.live",
+    "base_url": "http://api.gtnworld.live",
     "description": "Complete API documentation for NFT management system with MLM integration",
     
     "authentication": {
