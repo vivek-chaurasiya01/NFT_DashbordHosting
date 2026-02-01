@@ -78,7 +78,7 @@ Navigate to: http://localhost:3000/Dashbord/superadmin-test
 
 ```bash
 # Test direct server connection
-curl http://api.gtnworld.live/test
+curl https://api.gtnworld.live/test
 
 # Expected Response:
 {
@@ -92,7 +92,7 @@ curl http://api.gtnworld.live/test
 
 ```bash
 # Register new SuperAdmin
-curl -X POST http://api.gtnworld.live/api/SuperAdmin/register \
+curl -X POST https://api.gtnworld.live/api/SuperAdmin/register \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Super Admin",
@@ -115,7 +115,7 @@ curl -X POST http://api.gtnworld.live/api/SuperAdmin/register \
 
 ```bash
 # Login as SuperAdmin
-curl -X POST http://api.gtnworld.live/api/SuperAdmin/login \
+curl -X POST https://api.gtnworld.live/api/SuperAdmin/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "admin@example.com",
@@ -140,15 +140,15 @@ curl -X POST http://api.gtnworld.live/api/SuperAdmin/login \
 
 ```bash
 # Get company balance (replace TOKEN with actual token)
-curl -X GET http://api.gtnworld.live/api/SuperAdmin/company-balance \
+curl -X GET https://api.gtnworld.live/api/SuperAdmin/company-balance \
   -H "Authorization: Bearer TOKEN"
 
 # Get company transactions
-curl -X GET http://api.gtnworld.live/api/SuperAdmin/company-transactions \
+curl -X GET https://api.gtnworld.live/api/SuperAdmin/company-transactions \
   -H "Authorization: Bearer TOKEN"
 
 # Get all users
-curl -X GET http://api.gtnworld.live/api/auth/Getuser \
+curl -X GET https://api.gtnworld.live/api/auth/Getuser \
   -H "Authorization: Bearer TOKEN"
 ```
 

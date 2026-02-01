@@ -47,7 +47,7 @@
 
 //       // Fetch MLM hierarchy data
 //       const hierarchyResponse = await axios.get(
-//         "http://api.gtnworld.live/api/mlm/hierarchy",
+//         "https://api.gtnworld.live/api/mlm/hierarchy",
 //       );
 //       const hierarchyData = hierarchyResponse.data;
 
@@ -101,7 +101,7 @@
 //         localStorage.getItem("token") ||
 //         localStorage.getItem("superAdminToken");
 //       const response = await axios.post(
-//         "http://api.gtnworld.live/api/auth/register",
+//         "https://api.gtnworld.live/api/auth/register",
 //         formData,
 //         {
 //           headers: { Authorization: `Bearer ${token}` },

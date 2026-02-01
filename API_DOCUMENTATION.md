@@ -3,7 +3,7 @@
 ## 📌 Base URL
 
 ```
-http://api.gtnworld.live/api
+https://api.gtnworld.live/api
 ```
 
 ## 🔐 Authentication
@@ -799,7 +799,7 @@ GET /system/health
 ## 🔧 **Testing with Postman:**
 
 1. Import this collection
-2. Set environment variable: `BASE_URL = http://api.gtnworld.live/api`
+2. Set environment variable: `BASE_URL = https://api.gtnworld.live/api`
 3. After login, set `TOKEN` variable
 4. All requests will auto-include token
 

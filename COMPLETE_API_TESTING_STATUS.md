@@ -4,7 +4,7 @@
 
 **Total APIs:** 25 endpoints
 **Categories:** 6 main sections
-**Base URL:** `http://api.gtnworld.live`
+**Base URL:** `https://api.gtnworld.live`
 
 ### 🔍 **Category-wise Status**
 
@@ -72,7 +72,7 @@
 #### **1. SuperAdmin Login**
 
 ```bash
-curl -X POST http://api.gtnworld.live/api/SuperAdmin/login \
+curl -X POST https://api.gtnworld.live/api/SuperAdmin/login \
   -H "Content-Type: application/json" \
   -d '{"email":"admin@example.com","password":"admin123"}'
 
@@ -92,7 +92,7 @@ curl -X POST http://api.gtnworld.live/api/SuperAdmin/login \
 #### **2. Get All Users**
 
 ```bash
-curl -X GET http://api.gtnworld.live/api/auth/Getuser \
+curl -X GET https://api.gtnworld.live/api/auth/Getuser \
   -H "Authorization: Bearer YOUR_TOKEN"
 
 # Expected Response:
@@ -114,7 +114,7 @@ curl -X GET http://api.gtnworld.live/api/auth/Getuser \
 #### **3. Company Transactions**
 
 ```bash
-curl -X GET http://api.gtnworld.live/api/SuperAdmin/company-transactions \
+curl -X GET https://api.gtnworld.live/api/SuperAdmin/company-transactions \
   -H "Authorization: Bearer YOUR_TOKEN"
 
 # Expected Response:
@@ -136,7 +136,7 @@ curl -X GET http://api.gtnworld.live/api/SuperAdmin/company-transactions \
 ##### **1. User Registration**
 
 ```bash
-curl -X POST http://api.gtnworld.live/api/auth/register \
+curl -X POST https://api.gtnworld.live/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "name": "John Doe",
@@ -166,7 +166,7 @@ curl -X POST http://api.gtnworld.live/api/auth/register \
 ##### **2. NFT System Initialize**
 
 ```bash
-curl -X POST http://api.gtnworld.live/api/nft/initialize \
+curl -X POST https://api.gtnworld.live/api/nft/initialize \
   -H "Authorization: Bearer ADMIN_TOKEN"
 
 # Expected Response:
@@ -184,7 +184,7 @@ curl -X POST http://api.gtnworld.live/api/nft/initialize \
 ##### **3. Wallet Activation**
 
 ```bash
-curl -X POST http://api.gtnworld.live/api/wallet/activate \
+curl -X POST https://api.gtnworld.live/api/wallet/activate \
   -H "Authorization: Bearer USER_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{

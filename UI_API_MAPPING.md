@@ -33,7 +33,7 @@ import axios from "axios";
 const fetchDashboardStats = async () => {
   const token = localStorage.getItem("token");
   const response = await axios.get(
-    "http://api.gtnworld.live/api/admin/dashboard",
+    "https://api.gtnworld.live/api/admin/dashboard",
     {
       headers: { Authorization: `Bearer ${token}` },
     },
@@ -82,7 +82,7 @@ Request: { canWithdraw: false }
 const freezeUser = async (userId, isFrozen) => {
   const token = localStorage.getItem("token");
   await axios.patch(
-    `http://api.gtnworld.live/api/admin/users/${userId}/freeze`,
+    `https://api.gtnworld.live/api/admin/users/${userId}/freeze`,
     { isFrozen },
     { headers: { Authorization: `Bearer ${token}` } },
   );
@@ -92,7 +92,7 @@ const freezeUser = async (userId, isFrozen) => {
 const toggleTrading = async (userId, canTrade) => {
   const token = localStorage.getItem("token");
   await axios.patch(
-    `http://api.gtnworld.live/api/admin/users/${userId}/trading`,
+    `https://api.gtnworld.live/api/admin/users/${userId}/trading`,
     { canTrade },
     { headers: { Authorization: `Bearer ${token}` } },
   );
@@ -101,7 +101,7 @@ const toggleTrading = async (userId, canTrade) => {
 const toggleWithdrawal = async (userId, canWithdraw) => {
   const token = localStorage.getItem("token");
   await axios.patch(
-    `http://api.gtnworld.live/api/admin/users/${userId}/withdrawal`,
+    `https://api.gtnworld.live/api/admin/users/${userId}/withdrawal`,
     { canWithdraw },
     { headers: { Authorization: `Bearer ${token}` } },
   );
@@ -145,7 +145,7 @@ Response: {
 const fetchUsersWithParents = async () => {
   const token = localStorage.getItem("token");
   const response = await axios.get(
-    "http://api.gtnworld.live/api/user/mlm-tree",
+    "https://api.gtnworld.live/api/user/mlm-tree",
     {
       headers: { Authorization: `Bearer ${token}` },
     },
@@ -197,7 +197,7 @@ const fetchWalletData = async () => {
 
   // Get balance
   const balanceRes = await axios.get(
-    "http://api.gtnworld.live/api/wallet/balance",
+    "https://api.gtnworld.live/api/wallet/balance",
     {
       headers: { Authorization: `Bearer ${token}` },
     },
@@ -205,7 +205,7 @@ const fetchWalletData = async () => {
 
   // Get transactions
   const txRes = await axios.get(
-    "http://api.gtnworld.live/api/user/transactions",
+    "https://api.gtnworld.live/api/user/transactions",
     {
       headers: { Authorization: `Bearer ${token}` },
     },
@@ -247,7 +247,7 @@ Response: {
 const fetchRegistrationData = async () => {
   const token = localStorage.getItem("token");
   const response = await axios.get(
-    "http://api.gtnworld.live/api/user/dashboard",
+    "https://api.gtnworld.live/api/user/dashboard",
     {
       headers: { Authorization: `Bearer ${token}` },
     },
@@ -289,7 +289,7 @@ Response: {
 const fetchAnalytics = async () => {
   const token = localStorage.getItem("token");
   const response = await axios.get(
-    "http://api.gtnworld.live/api/user/mlm-earnings",
+    "https://api.gtnworld.live/api/user/mlm-earnings",
     {
       headers: { Authorization: `Bearer ${token}` },
     },
@@ -431,7 +431,7 @@ const fetchDashboardStats = async () => {
   try {
     const token = localStorage.getItem("token");
     const response = await axios.get(
-      "http://api.gtnworld.live/api/admin/dashboard",
+      "https://api.gtnworld.live/api/admin/dashboard",
       {
         headers: { Authorization: `Bearer ${token}` },
       },
@@ -456,10 +456,10 @@ const fetchWalletData = async () => {
     const token = localStorage.getItem("token");
 
     const [balanceRes, txRes] = await Promise.all([
-      axios.get("http://api.gtnworld.live/api/wallet/balance", {
+      axios.get("https://api.gtnworld.live/api/wallet/balance", {
         headers: { Authorization: `Bearer ${token}` },
       }),
-      axios.get("http://api.gtnworld.live/api/user/transactions", {
+      axios.get("https://api.gtnworld.live/api/user/transactions", {
         headers: { Authorization: `Bearer ${token}` },
       }),
     ]);
@@ -483,7 +483,7 @@ const fetchMLMTree = async () => {
   try {
     const token = localStorage.getItem("token");
     const response = await axios.get(
-      "http://api.gtnworld.live/api/user/mlm-tree",
+      "https://api.gtnworld.live/api/user/mlm-tree",
       {
         headers: { Authorization: `Bearer ${token}` },
       },
@@ -507,7 +507,7 @@ const fetchAnalytics = async () => {
   try {
     const token = localStorage.getItem("token");
     const response = await axios.get(
-      "http://api.gtnworld.live/api/user/mlm-earnings",
+      "https://api.gtnworld.live/api/user/mlm-earnings",
       {
         headers: { Authorization: `Bearer ${token}` },
       },

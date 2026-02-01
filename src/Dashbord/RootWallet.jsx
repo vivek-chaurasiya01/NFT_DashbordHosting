@@ -112,7 +112,7 @@ export default function RootWallet() {
       if (!token) return;
 
       const response = await axios.get(
-        "http://api.gtnworld.live/api/admin/users",
+        "https://api.gtnworld.live/api/admin/users",
         {
           headers: { Authorization: `Bearer ${token}` },
         },

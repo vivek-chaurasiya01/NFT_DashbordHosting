@@ -75,7 +75,7 @@ import axios from "axios";
 const fetchMLMTree = async () => {
   const token = localStorage.getItem("token");
   const response = await axios.get(
-    "http://api.gtnworld.live/api/user/mlm-tree",
+    "https://api.gtnworld.live/api/user/mlm-tree",
     {
       headers: { Authorization: `Bearer ${token}` },
     },
@@ -90,7 +90,7 @@ const fetchMLMTree = async () => {
 const fetchAnalytics = async () => {
   const token = localStorage.getItem("token");
   const response = await axios.get(
-    "http://api.gtnworld.live/api/user/mlm-earnings",
+    "https://api.gtnworld.live/api/user/mlm-earnings",
     {
       headers: { Authorization: `Bearer ${token}` },
     },
@@ -165,7 +165,7 @@ GET /api/user/transactions
 ## ⚠️ **Important Notes**
 
 1. **Token Required**: All APIs need JWT token in header
-2. **Base URL**: `http://api.gtnworld.live`
+2. **Base URL**: `https://api.gtnworld.live`
 3. **Token Storage**: `localStorage.getItem('token')`
 4. **Error Handling**: All components have try-catch blocks
 5. **Loading States**: All components show loading spinner

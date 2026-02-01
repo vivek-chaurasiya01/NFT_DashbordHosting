@@ -15,7 +15,7 @@ export default function Login() {
 
     try {
       const response = await fetch(
-        "http://api.gtnworld.live/api/SuperAdmin/login",
+        "https://api.gtnworld.live/api/SuperAdmin/login",
         {
           method: "POST",
           headers: {
