@@ -4,58 +4,64 @@
 
 **Backend APIs:** 25 endpoints
 **Categories:** 6 main sections
-**Base URL:** `http://localhost:5000`
+**Base URL:** `https://api.gtnworld.live`
 
 ### 🔍 **API Status by Category**
 
 #### **🔐 Authentication (3 APIs)**
-| API | Endpoint | Status | Frontend Ready | Backend Ready |
-|-----|----------|--------|----------------|---------------|
-| User Register | POST /api/auth/register | ❌ NEEDS TESTING | ✅ Ready | ✅ Available |
-| User Login | POST /api/auth/login | ❌ NEEDS TESTING | ✅ Ready | ✅ Available |
-| Get All Users | GET /api/auth/Getuser | ✅ WORKING | ✅ Ready | ✅ Available |
+
+| API           | Endpoint                | Status           | Frontend Ready | Backend Ready |
+| ------------- | ----------------------- | ---------------- | -------------- | ------------- |
+| User Register | POST /api/auth/register | ❌ NEEDS TESTING | ✅ Ready       | ✅ Available  |
+| User Login    | POST /api/auth/login    | ❌ NEEDS TESTING | ✅ Ready       | ✅ Available  |
+| Get All Users | GET /api/auth/Getuser   | ✅ WORKING       | ✅ Ready       | ✅ Available  |
 
 #### **🏢 SuperAdmin (4 APIs)**
-| API | Endpoint | Status | Frontend Ready | Backend Ready |
-|-----|----------|--------|----------------|---------------|
-| Admin Register | POST /api/SuperAdmin/register | ❌ NEEDS TESTING | ✅ Ready | ✅ Available |
-| Admin Login | POST /api/SuperAdmin/login | ✅ WORKING | ✅ Ready | ✅ Available |
-| Company Balance | GET /api/SuperAdmin/company-balance | ❌ NEEDS TESTING | ✅ Ready | ✅ Available |
-| Company Transactions | GET /api/SuperAdmin/company-transactions | ✅ WORKING | ✅ Ready | ✅ Available |
+
+| API                  | Endpoint                                 | Status           | Frontend Ready | Backend Ready |
+| -------------------- | ---------------------------------------- | ---------------- | -------------- | ------------- |
+| Admin Register       | POST /api/SuperAdmin/register            | ❌ NEEDS TESTING | ✅ Ready       | ✅ Available  |
+| Admin Login          | POST /api/SuperAdmin/login               | ✅ WORKING       | ✅ Ready       | ✅ Available  |
+| Company Balance      | GET /api/SuperAdmin/company-balance      | ❌ NEEDS TESTING | ✅ Ready       | ✅ Available  |
+| Company Transactions | GET /api/SuperAdmin/company-transactions | ✅ WORKING       | ✅ Ready       | ✅ Available  |
 
 #### **💰 Wallet Operations (3 APIs)**
-| API | Endpoint | Status | Frontend Ready | Backend Ready |
-|-----|----------|--------|----------------|---------------|
-| Activate Wallet | POST /api/wallet/activate | ❌ NEEDS TESTING | ✅ Ready | ✅ Available |
-| Get Balance | GET /api/wallet/balance | ❌ NEEDS TESTING | ✅ Ready | ✅ Available |
-| Withdraw Funds | POST /api/wallet/withdraw | ❌ NEEDS TESTING | ✅ Ready | ✅ Available |
+
+| API             | Endpoint                  | Status           | Frontend Ready | Backend Ready |
+| --------------- | ------------------------- | ---------------- | -------------- | ------------- |
+| Activate Wallet | POST /api/wallet/activate | ❌ NEEDS TESTING | ✅ Ready       | ✅ Available  |
+| Get Balance     | GET /api/wallet/balance   | ❌ NEEDS TESTING | ✅ Ready       | ✅ Available  |
+| Withdraw Funds  | POST /api/wallet/withdraw | ❌ NEEDS TESTING | ✅ Ready       | ✅ Available  |
 
 #### **🎨 NFT System (7 APIs)**
-| API | Endpoint | Status | Frontend Ready | Backend Ready |
-|-----|----------|--------|----------------|---------------|
-| Initialize System | POST /api/nft/initialize | ❌ NEEDS TESTING | ✅ Ready | ✅ Available |
-| Get Marketplace | GET /api/nft/marketplace | ⚠️ PARTIAL | ✅ Ready | ✅ Available |
-| Buy Pre-launch NFT | POST /api/nft/buy-prelaunch | ❌ NEEDS TESTING | ✅ Ready | ✅ Available |
-| Buy Trading NFT | POST /api/nft/buy-trading | ❌ NEEDS TESTING | ✅ Ready | ✅ Available |
-| Sell NFT | POST /api/nft/sell/:nftId | ❌ NEEDS TESTING | ✅ Ready | ✅ Available |
-| My NFTs | GET /api/nft/my-nfts | ⚠️ PARTIAL | ✅ Ready | ✅ Available |
-| NFT Status | GET /api/nft/status | ❌ NEEDS TESTING | ✅ Ready | ✅ Available |
+
+| API                | Endpoint                    | Status           | Frontend Ready | Backend Ready |
+| ------------------ | --------------------------- | ---------------- | -------------- | ------------- |
+| Initialize System  | POST /api/nft/initialize    | ❌ NEEDS TESTING | ✅ Ready       | ✅ Available  |
+| Get Marketplace    | GET /api/nft/marketplace    | ⚠️ PARTIAL       | ✅ Ready       | ✅ Available  |
+| Buy Pre-launch NFT | POST /api/nft/buy-prelaunch | ❌ NEEDS TESTING | ✅ Ready       | ✅ Available  |
+| Buy Trading NFT    | POST /api/nft/buy-trading   | ❌ NEEDS TESTING | ✅ Ready       | ✅ Available  |
+| Sell NFT           | POST /api/nft/sell/:nftId   | ❌ NEEDS TESTING | ✅ Ready       | ✅ Available  |
+| My NFTs            | GET /api/nft/my-nfts        | ⚠️ PARTIAL       | ✅ Ready       | ✅ Available  |
+| NFT Status         | GET /api/nft/status         | ❌ NEEDS TESTING | ✅ Ready       | ✅ Available  |
 
 #### **👤 User Management (4 APIs)**
-| API | Endpoint | Status | Frontend Ready | Backend Ready |
-|-----|----------|--------|----------------|---------------|
-| User Profile | GET /api/user/profile | ❌ NEEDS TESTING | ✅ Ready | ✅ Available |
-| User Dashboard | GET /api/user/dashboard | ❌ NEEDS TESTING | ✅ Ready | ✅ Available |
-| MLM Tree | GET /api/user/mlm-tree | ❌ NEEDS TESTING | ✅ Ready | ✅ Available |
-| User Transactions | GET /api/user/transactions | ❌ NEEDS TESTING | ✅ Ready | ✅ Available |
+
+| API               | Endpoint                   | Status           | Frontend Ready | Backend Ready |
+| ----------------- | -------------------------- | ---------------- | -------------- | ------------- |
+| User Profile      | GET /api/user/profile      | ❌ NEEDS TESTING | ✅ Ready       | ✅ Available  |
+| User Dashboard    | GET /api/user/dashboard    | ❌ NEEDS TESTING | ✅ Ready       | ✅ Available  |
+| MLM Tree          | GET /api/user/mlm-tree     | ❌ NEEDS TESTING | ✅ Ready       | ✅ Available  |
+| User Transactions | GET /api/user/transactions | ❌ NEEDS TESTING | ✅ Ready       | ✅ Available  |
 
 #### **🏗️ Admin Settings (4 APIs)**
-| API | Endpoint | Status | Frontend Ready | Backend Ready |
-|-----|----------|--------|----------------|---------------|
-| Create NFT Batch | POST /api/admin-settings/nft/create-batch | ❌ NEEDS TESTING | ✅ Ready | ✅ Available |
-| NFT Stats | GET /api/admin-settings/nft/stats | ❌ NEEDS TESTING | ✅ Ready | ✅ Available |
-| Get All Users | GET /api/admin-settings/users | ❌ NEEDS TESTING | ✅ Ready | ✅ Available |
-| Adjust Balance | PUT /api/admin-settings/users/:id/balance | ❌ NEEDS TESTING | ✅ Ready | ✅ Available |
+
+| API              | Endpoint                                  | Status           | Frontend Ready | Backend Ready |
+| ---------------- | ----------------------------------------- | ---------------- | -------------- | ------------- |
+| Create NFT Batch | POST /api/admin-settings/nft/create-batch | ❌ NEEDS TESTING | ✅ Ready       | ✅ Available  |
+| NFT Stats        | GET /api/admin-settings/nft/stats         | ❌ NEEDS TESTING | ✅ Ready       | ✅ Available  |
+| Get All Users    | GET /api/admin-settings/users             | ❌ NEEDS TESTING | ✅ Ready       | ✅ Available  |
+| Adjust Balance   | PUT /api/admin-settings/users/:id/balance | ❌ NEEDS TESTING | ✅ Ready       | ✅ Available  |
 
 ---
 
@@ -64,8 +70,9 @@
 ### **✅ Working APIs (3/25)**
 
 #### **1. SuperAdmin Login**
+
 ```bash
-curl -X POST http://localhost:5000/api/SuperAdmin/login \
+curl -X POST https://api.gtnworld.live/api/SuperAdmin/login \
   -H "Content-Type: application/json" \
   -d '{"email":"admin@example.com","password":"admin123"}'
 
@@ -84,8 +91,9 @@ curl -X POST http://localhost:5000/api/SuperAdmin/login \
 ```
 
 #### **2. Get All Users**
+
 ```bash
-curl -X GET http://localhost:5000/api/auth/Getuser \
+curl -X GET https://api.gtnworld.live/api/auth/Getuser \
   -H "Authorization: Bearer YOUR_TOKEN"
 
 # Expected Response:
@@ -106,8 +114,9 @@ curl -X GET http://localhost:5000/api/auth/Getuser \
 ```
 
 #### **3. Company Transactions**
+
 ```bash
-curl -X GET http://localhost:5000/api/SuperAdmin/company-transactions \
+curl -X GET https://api.gtnworld.live/api/SuperAdmin/company-transactions \
   -H "Authorization: Bearer YOUR_TOKEN"
 
 # Expected Response:
@@ -137,8 +146,9 @@ curl -X GET http://localhost:5000/api/SuperAdmin/company-transactions \
 #### **High Priority Testing:**
 
 ##### **1. User Registration**
+
 ```bash
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST https://api.gtnworld.live/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "name": "John Doe",
@@ -167,8 +177,9 @@ curl -X POST http://localhost:5000/api/auth/register \
 ```
 
 ##### **2. NFT System Initialize**
+
 ```bash
-curl -X POST http://localhost:5000/api/nft/initialize \
+curl -X POST https://api.gtnworld.live/api/nft/initialize \
   -H "Authorization: Bearer ADMIN_TOKEN"
 
 # Expected Response:
@@ -190,8 +201,9 @@ curl -X POST http://localhost:5000/api/nft/initialize \
 ```
 
 ##### **3. Wallet Activation**
+
 ```bash
-curl -X POST http://localhost:5000/api/wallet/activate \
+curl -X POST https://api.gtnworld.live/api/wallet/activate \
   -H "Authorization: Bearer USER_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -211,8 +223,9 @@ curl -X POST http://localhost:5000/api/wallet/activate \
 ```
 
 ##### **4. Buy Pre-launch NFT**
+
 ```bash
-curl -X POST http://localhost:5000/api/nft/buy-prelaunch \
+curl -X POST https://api.gtnworld.live/api/nft/buy-prelaunch \
   -H "Authorization: Bearer USER_TOKEN"
 
 # Expected Response:
@@ -236,16 +249,19 @@ curl -X POST http://localhost:5000/api/nft/buy-prelaunch \
 ## 🎯 **Business Logic Verification**
 
 ### **MLM System:**
+
 - **Registration:** Basic $10, Premium $20
 - **Parent Bonus:** $1 per parent (max 10 levels)
 - **Company Share:** Remaining after parent payouts
 
 ### **NFT Trading:**
+
 - **Pre-launch:** 500 NFTs, max 2 per user at $10
 - **Trading Phase:** Hold/Sell system with 40-40-20 distribution
 - **Batch System:** 125 batches of 4 NFTs each
 
 ### **Hold/Sell Logic:**
+
 - **First Purchase:** 1 Hold + 1 Sell NFT
 - **Next Purchase:** Previous Hold → Sell, New → Hold
 - **Rule:** Always maintain exactly 1 Hold NFT
@@ -255,6 +271,7 @@ curl -X POST http://localhost:5000/api/nft/buy-prelaunch \
 ## 📋 **Frontend Component Status**
 
 ### **✅ Ready Components:**
+
 1. **Login.jsx** - SuperAdmin login working
 2. **UserManagement.jsx** - User list working, ready for all user APIs
 3. **RootWallet.jsx** - Company transactions working
@@ -263,6 +280,7 @@ curl -X POST http://localhost:5000/api/nft/buy-prelaunch \
 6. **MLMHierarchy.jsx** - Ready for MLM tree APIs
 
 ### **🔧 Component-API Mapping:**
+
 ```javascript
 Login.jsx → POST /api/SuperAdmin/login ✅
 UserManagement.jsx → GET /api/auth/Getuser ✅
@@ -276,24 +294,28 @@ Overview.jsx → Multiple dashboard APIs ❌ (Ready for testing)
 ## 🚀 **Testing Workflow**
 
 ### **Phase 1: Authentication & Setup**
+
 1. Test SuperAdmin registration
 2. Test user registration with MLM
 3. Test wallet activation
 4. Test user login
 
 ### **Phase 2: NFT System**
+
 1. Initialize NFT system
 2. Test marketplace listing
 3. Test pre-launch NFT purchase
 4. Test NFT selling with profit distribution
 
 ### **Phase 3: MLM & Analytics**
+
 1. Test MLM tree generation
 2. Test user dashboard data
 3. Test transaction history
 4. Test admin user management
 
 ### **Phase 4: Advanced Features**
+
 1. Test admin NFT batch creation
 2. Test user balance adjustment
 3. Test withdrawal system
@@ -303,13 +325,13 @@ Overview.jsx → Multiple dashboard APIs ❌ (Ready for testing)
 
 ## 📊 **Current Status Summary**
 
-| Metric | Count | Percentage |
-|--------|-------|------------|
-| **Total APIs** | 25 | 100% |
-| **Working APIs** | 3 | 12% |
-| **Backend Ready** | 25 | 100% |
-| **Frontend Ready** | 25 | 100% |
-| **Need Testing** | 22 | 88% |
+| Metric             | Count | Percentage |
+| ------------------ | ----- | ---------- |
+| **Total APIs**     | 25    | 100%       |
+| **Working APIs**   | 3     | 12%        |
+| **Backend Ready**  | 25    | 100%       |
+| **Frontend Ready** | 25    | 100%       |
+| **Need Testing**   | 22    | 88%        |
 
 ---
 

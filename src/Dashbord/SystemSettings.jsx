@@ -7,8 +7,8 @@ export default function SystemSettings() {
     registrationAmount: 10,
     parentIncome: 1,
     maxParents: 9,
-    registrationStatus: 'ON',
-    maintenanceMode: 'OFF'
+    registrationStatus: "ON",
+    maintenanceMode: "OFF",
   });
   const [loading, setLoading] = useState(false);
   const [companyBalance, setCompanyBalance] = useState(0);
@@ -20,31 +20,38 @@ export default function SystemSettings() {
 
   const fetchSystemData = async () => {
     try {
-      const token = localStorage.getItem("token") || localStorage.getItem("superAdminToken");
-      
+      const token =
+        localStorage.getItem("token") ||
+        localStorage.getItem("superAdminToken");
+
       // Fetch company balance from working API
-      const balanceRes = await axios.get("http://localhost:5000/api/admin/company-balance", {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      
+      const balanceRes = await axios.get(
+        "https://api.gtnworld.live/api/admin/company-balance",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
+
       if (balanceRes.data.success) {
         setCompanyBalance(balanceRes.data.data.totalBalance || 0);
       }
-      
+
       // Fetch users for stats
-      const usersRes = await axios.get("http://localhost:5000/api/auth/Getuser", {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      
+      const usersRes = await axios.get(
+        "https://api.gtnworld.live/api/auth/Getuser",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
+
       const users = usersRes.data.data || usersRes.data || [];
       setSystemStats({
         totalUsers: users.length,
-        activeUsers: users.filter(u => u.isActive).length,
-        totalBalance: users.reduce((sum, u) => sum + (u.balance || 0), 0)
+        activeUsers: users.filter((u) => u.isActive).length,
+        totalBalance: users.reduce((sum, u) => sum + (u.balance || 0), 0),
       });
-      
     } catch (error) {
-      console.error('Error fetching system data:', error);
+      console.error("Error fetching system data:", error);
     }
   };
 
@@ -52,20 +59,20 @@ export default function SystemSettings() {
     setLoading(true);
     try {
       // Simulate save (you can implement actual API call here)
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       Swal.fire({
-        icon: 'success',
-        title: 'Settings Saved!',
-        text: 'System settings updated successfully',
-        confirmButtonColor: '#9333ea'
+        icon: "success",
+        title: "Settings Saved!",
+        text: "System settings updated successfully",
+        confirmButtonColor: "#9333ea",
       });
     } catch (error) {
       Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Failed to save settings' +error,
-        confirmButtonColor: '#ef4444'
+        icon: "error",
+        title: "Error",
+        text: "Failed to save settings" + error,
+        confirmButtonColor: "#ef4444",
       });
     } finally {
       setLoading(false);
@@ -73,7 +80,7 @@ export default function SystemSettings() {
   };
 
   const handleInputChange = (field, value) => {
-    setSettings(prev => ({ ...prev, [field]: value }));
+    setSettings((prev) => ({ ...prev, [field]: value }));
   };
 
   return (
@@ -81,13 +88,17 @@ export default function SystemSettings() {
       <div>
         <h1 className="text-3xl font-bold text-gray-800">⚙️ System Settings</h1>
         <p className="text-gray-500 mt-1">SUPER ADMIN ONLY - Runtime Control</p>
-        <p className="text-blue-600 text-sm mt-1">👉 Changes apply to future users</p>
+        <p className="text-blue-600 text-sm mt-1">
+          👉 Changes apply to future users
+        </p>
       </div>
 
       {/* System Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-4 rounded-2xl text-white">
-          <h3 className="text-lg font-bold">${companyBalance.toLocaleString()}</h3>
+          <h3 className="text-lg font-bold">
+            ${companyBalance.toLocaleString()}
+          </h3>
           <p className="text-sm opacity-90">Company Balance</p>
         </div>
         <div className="bg-gradient-to-r from-green-500 to-green-600 p-4 rounded-2xl text-white">
@@ -102,40 +113,52 @@ export default function SystemSettings() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-white p-6 rounded-2xl shadow-lg border-2 border-gray-200">
-          <label className="block text-sm font-bold text-gray-700 mb-3">Registration Amount (default $10)</label>
+          <label className="block text-sm font-bold text-gray-700 mb-3">
+            Registration Amount (default $10)
+          </label>
           <input
             type="number"
             value={settings.registrationAmount}
-            onChange={(e) => handleInputChange('registrationAmount', e.target.value)}
+            onChange={(e) =>
+              handleInputChange("registrationAmount", e.target.value)
+            }
             className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 font-semibold text-lg"
           />
         </div>
 
         <div className="bg-white p-6 rounded-2xl shadow-lg border-2 border-gray-200">
-          <label className="block text-sm font-bold text-gray-700 mb-3">Per Parent Income ($1)</label>
+          <label className="block text-sm font-bold text-gray-700 mb-3">
+            Per Parent Income ($1)
+          </label>
           <input
             type="number"
             value={settings.parentIncome}
-            onChange={(e) => handleInputChange('parentIncome', e.target.value)}
+            onChange={(e) => handleInputChange("parentIncome", e.target.value)}
             className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 font-semibold text-lg"
           />
         </div>
 
         <div className="bg-white p-6 rounded-2xl shadow-lg border-2 border-gray-200">
-          <label className="block text-sm font-bold text-gray-700 mb-3">Max Parents Allowed</label>
+          <label className="block text-sm font-bold text-gray-700 mb-3">
+            Max Parents Allowed
+          </label>
           <input
             type="number"
             value={settings.maxParents}
-            onChange={(e) => handleInputChange('maxParents', e.target.value)}
+            onChange={(e) => handleInputChange("maxParents", e.target.value)}
             className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 font-semibold text-lg"
           />
         </div>
 
         <div className="bg-white p-6 rounded-2xl shadow-lg border-2 border-gray-200">
-          <label className="block text-sm font-bold text-gray-700 mb-3">Registration Status</label>
-          <select 
+          <label className="block text-sm font-bold text-gray-700 mb-3">
+            Registration Status
+          </label>
+          <select
             value={settings.registrationStatus}
-            onChange={(e) => handleInputChange('registrationStatus', e.target.value)}
+            onChange={(e) =>
+              handleInputChange("registrationStatus", e.target.value)
+            }
             className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 font-semibold text-lg"
           >
             <option value="ON">ON</option>
@@ -144,10 +167,14 @@ export default function SystemSettings() {
         </div>
 
         <div className="bg-white p-6 rounded-2xl shadow-lg border-2 border-gray-200">
-          <label className="block text-sm font-bold text-gray-700 mb-3">Maintenance Mode</label>
-          <select 
+          <label className="block text-sm font-bold text-gray-700 mb-3">
+            Maintenance Mode
+          </label>
+          <select
             value={settings.maintenanceMode}
-            onChange={(e) => handleInputChange('maintenanceMode', e.target.value)}
+            onChange={(e) =>
+              handleInputChange("maintenanceMode", e.target.value)
+            }
             className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 font-semibold text-lg"
           >
             <option value="OFF">OFF</option>
@@ -157,21 +184,21 @@ export default function SystemSettings() {
       </div>
 
       <div className="flex gap-4">
-        <button 
+        <button
           onClick={handleSaveSettings}
           disabled={loading}
           className="px-8 py-4 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-bold rounded-xl hover:shadow-2xl transition text-lg disabled:opacity-50"
         >
-          {loading ? 'Saving...' : 'Save Settings'}
+          {loading ? "Saving..." : "Save Settings"}
         </button>
-        <button 
+        <button
           onClick={() => {
             setSettings({
               registrationAmount: 10,
               parentIncome: 1,
               maxParents: 9,
-              registrationStatus: 'ON',
-              maintenanceMode: 'OFF'
+              registrationStatus: "ON",
+              maintenanceMode: "OFF",
             });
           }}
           className="px-8 py-4 bg-gray-200 text-gray-700 font-bold rounded-xl hover:bg-gray-300 transition text-lg"
@@ -182,8 +209,6 @@ export default function SystemSettings() {
     </div>
   );
 }
-
-
 
 // import React, { useState, useEffect } from "react";
 // import axios from "axios";
@@ -306,19 +331,19 @@ export default function SystemSettings() {
 //       // Fetch core data first
 //       const [statsRes, usersRes, withdrawalsRes, settingsRes] =
 //         await Promise.all([
-//           axios.get("http://localhost:5000/api/admin-settings/stats", {
+//           axios.get("https://api.gtnworld.live/api/admin-settings/stats", {
 //             headers: { Authorization: `Bearer ${token}` },
 //           }),
-//           axios.get("http://localhost:5000/api/admin-settings/users", {
+//           axios.get("https://api.gtnworld.live/api/admin-settings/users", {
 //             headers: { Authorization: `Bearer ${token}` },
 //           }),
 //           axios.get(
-//             "http://localhost:5000/api/admin-settings/withdrawals/pending",
+//             "https://api.gtnworld.live/api/admin-settings/withdrawals/pending",
 //             {
 //               headers: { Authorization: `Bearer ${token}` },
 //             },
 //           ),
-//           axios.get("http://localhost:5000/api/admin-settings/settings", {
+//           axios.get("https://api.gtnworld.live/api/admin-settings/settings", {
 //             headers: { Authorization: `Bearer ${token}` },
 //           }),
 //         ]);
@@ -344,7 +369,7 @@ export default function SystemSettings() {
 //       // Fetch NFT stats separately with error handling
 //       try {
 //         const nftStatsRes = await axios.get(
-//           "http://localhost:5000/api/admin-settings/nft/stats",
+//           "https://api.gtnworld.live/api/admin-settings/nft/stats",
 //           {
 //             headers: { Authorization: `Bearer ${token}` },
 //           },
@@ -422,7 +447,7 @@ export default function SystemSettings() {
 
 //       if (result.isConfirmed) {
 //         await axios.put(
-//           `http://localhost:5000/api/admin-settings/users/${userId}/status`,
+//           `https://api.gtnworld.live/api/admin-settings/users/${userId}/status`,
 //           { action },
 //           { headers: { Authorization: `Bearer ${token}` } },
 //         );
@@ -475,7 +500,7 @@ export default function SystemSettings() {
 //         if (reason) {
 //           const token = getAdminToken();
 //           await axios.put(
-//             `http://localhost:5000/api/admin-settings/users/${userId}/balance`,
+//             `https://api.gtnworld.live/api/admin-settings/users/${userId}/balance`,
 //             { amount: parseFloat(amount), type, reason },
 //             { headers: { Authorization: `Bearer ${token}` } },
 //           );
@@ -519,7 +544,7 @@ export default function SystemSettings() {
 
 //         if (txHash) {
 //           await axios.put(
-//             `http://localhost:5000/api/admin-settings/withdrawals/${transactionId}/process`,
+//             `https://api.gtnworld.live/api/admin-settings/withdrawals/${transactionId}/process`,
 //             { action, txHash },
 //             { headers: { Authorization: `Bearer ${token}` } },
 //           );
@@ -547,7 +572,7 @@ export default function SystemSettings() {
 
 //         if (reason) {
 //           await axios.put(
-//             `http://localhost:5000/api/admin-settings/withdrawals/${transactionId}/process`,
+//             `https://api.gtnworld.live/api/admin-settings/withdrawals/${transactionId}/process`,
 //             { action, reason },
 //             { headers: { Authorization: `Bearer ${token}` } },
 //           );
@@ -578,7 +603,7 @@ export default function SystemSettings() {
 //       const token = getAdminToken();
 
 //       const mlmRes = await axios.put(
-//         "http://localhost:5000/api/admin-settings/settings",
+//         "https://api.gtnworld.live/api/admin-settings/settings",
 //         {
 //           settingType: "mlm",
 //           settings: mlmSettings,
@@ -587,7 +612,7 @@ export default function SystemSettings() {
 //       );
 
 //       const nftRes = await axios.put(
-//         "http://localhost:5000/api/admin-settings/settings",
+//         "https://api.gtnworld.live/api/admin-settings/settings",
 //         {
 //           settingType: "nft",
 //           settings: nftSettings,
@@ -632,7 +657,7 @@ export default function SystemSettings() {
 //         const token = getAdminToken();
 //         try {
 //           await axios.post(
-//             "http://localhost:5000/api/admin-settings/nft/create-batch",
+//             "https://api.gtnworld.live/api/admin-settings/nft/create-batch",
 //             { batchSize: parseInt(batchSize), basePrice: nftSettings.basePrice },
 //             { headers: { Authorization: `Bearer ${token}` } },
 //           );
@@ -688,7 +713,7 @@ export default function SystemSettings() {
 
 //       if (action === "freeze" || action === "unfreeze") {
 //         await axios.post(
-//           "http://localhost:5000/api/admin-settings/users/bulk-action",
+//           "https://api.gtnworld.live/api/admin-settings/users/bulk-action",
 //           { userIds, action },
 //           { headers: { Authorization: `Bearer ${token}` } },
 //         );

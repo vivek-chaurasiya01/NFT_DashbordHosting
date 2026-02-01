@@ -1,11 +1,11 @@
 // import { useState, useEffect } from "react";
 // import axios from "axios";
-// import { 
-//   FaUsers, 
-//   FaWallet, 
-//   FaMoneyBillWave, 
-//   FaUserFriends, 
-//   FaChartLine, 
+// import {
+//   FaUsers,
+//   FaWallet,
+//   FaMoneyBillWave,
+//   FaUserFriends,
+//   FaChartLine,
 //   FaEye,
 //   FaFilter,
 //   FaCalendarAlt,
@@ -45,9 +45,9 @@
 //     try {
 //       if (showLoader) setRefreshing(true);
 //       setLoading(true);
-      
+
 //       const token = localStorage.getItem('token') || localStorage.getItem('superAdminToken');
-      
+
 //       if (!token) {
 //         // Clear all data when no token
 //         setRegistrations([]);
@@ -68,29 +68,29 @@
 //         });
 //         return;
 //       }
-      
-//       const response = await axios.get('http://localhost:5000/api/SuperAdmin/company-transactions', {
+
+//       const response = await axios.get('https://api.gtnworld.live/api/SuperAdmin/company-transactions', {
 //         headers: { Authorization: `Bearer ${token}` }
 //       });
-      
+
 //       if (response.data.success) {
 //         const data = response.data;
 //         const allTransactions = data.transactions || [];
-        
+
 //         const registrationTxs = allTransactions.filter(tx => tx.type === 'Registration');
-        
+
 //         const processedRegistrations = registrationTxs.map(tx => {
 //           const parentPayout = allTransactions.find(
-//             ptx => ptx.type === 'Parent Payout' && 
+//             ptx => ptx.type === 'Parent Payout' &&
 //             ptx.user?.code === tx.user?.code &&
 //             Math.abs(new Date(ptx.date) - new Date(tx.date)) < 60000
 //           );
-          
+
 //           const registrationAmount = Math.abs(tx.amount);
 //           const parentPayoutAmount = parentPayout ? Math.abs(parentPayout.amount) : 0;
 //           const companyEarnings = registrationAmount - parentPayoutAmount;
 //           const parentCount = tx.parentCount || 0;
-          
+
 //           return {
 //             id: tx.id || tx._id,
 //             user: tx.user?.name || 'Unknown User',
@@ -107,12 +107,12 @@
 //             paymentMethod: 'online'
 //           };
 //         });
-        
+
 //         const totalRegistrations = processedRegistrations.length;
 //         const totalRegistrationAmount = processedRegistrations.reduce((sum, reg) => sum + reg.registrationAmount, 0);
 //         const totalParentsPayout = processedRegistrations.reduce((sum, reg) => sum + reg.parentsPayout, 0);
 //         const totalCompanyEarnings = processedRegistrations.reduce((sum, reg) => sum + reg.companyEarnings, 0);
-        
+
 //         setRegistrations(processedRegistrations);
 //         setStats({
 //           totalRegistrations,
@@ -133,7 +133,7 @@
 //       }
 //     } catch (error) {
 //       console.error('Error fetching registration report:', error);
-      
+
 //       // Clear all data on error
 //       setRegistrations([]);
 //       setFilteredRegistrations([]);
@@ -143,7 +143,7 @@
 //         totalCompanyEarnings: 0,
 //         totalRegistrationAmount: 0
 //       });
-      
+
 //       if (error.response?.status === 401) {
 //         Swal.fire({
 //           icon: "error",
@@ -171,7 +171,7 @@
 
 //   const filterAndSortRegistrations = () => {
 //     let filtered = [...registrations];
-    
+
 //     // Search filter
 //     if (searchTerm) {
 //       filtered = filtered.filter(reg =>
@@ -180,12 +180,12 @@
 //         reg.userCode.toLowerCase().includes(searchTerm.toLowerCase())
 //       );
 //     }
-    
+
 //     // Date filter
 //     if (dateFilter !== "all") {
 //       const now = new Date();
 //       const filterDate = new Date();
-      
+
 //       switch(dateFilter) {
 //         case "today":
 //           filterDate.setHours(0, 0, 0, 0);
@@ -203,7 +203,7 @@
 //           break;
 //       }
 //     }
-    
+
 //     // Sorting
 //     filtered.sort((a, b) => {
 //       if (sortConfig.key === 'date') {
@@ -215,7 +215,7 @@
 //         ? a[sortConfig.key] - b[sortConfig.key]
 //         : b[sortConfig.key] - a[sortConfig.key];
 //     });
-    
+
 //     setFilteredRegistrations(filtered);
 //   };
 
@@ -228,15 +228,15 @@
 
 //   const getSortIcon = (key) => {
 //     if (sortConfig.key !== key) return <FaSort className="ml-1 opacity-50" />;
-//     return sortConfig.direction === 'asc' 
-//       ? <FaSortUp className="ml-1" /> 
+//     return sortConfig.direction === 'asc'
+//       ? <FaSortUp className="ml-1" />
 //       : <FaSortDown className="ml-1" />;
 //   };
 
 //   const showRegistrationDetails = (registration) => {
 //     setSelectedRow(registration.id);
 //     setTimeout(() => setSelectedRow(null), 300);
-    
+
 //     Swal.fire({
 //       title: `<div class="text-center mb-6">
 //                 <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-3xl mx-auto mb-4 shadow-lg">
@@ -253,30 +253,30 @@
 //               <p class="text-sm opacity-90">Registration Fee</p>
 //               <h4 class="text-xl font-bold mt-1">$${registration.registrationAmount}</h4>
 //             </div>
-            
+
 //             <div class="bg-gradient-to-br from-red-500 to-pink-600 p-4 rounded-xl text-white shadow-lg">
 //               <div class="text-2xl mb-2">📤</div>
 //               <p class="text-sm opacity-90">Parents Payout</p>
 //               <h4 class="text-xl font-bold mt-1">$${registration.parentsPayout}</h4>
 //             </div>
-            
+
 //             <div class="bg-gradient-to-br from-green-500 to-emerald-600 p-4 rounded-xl text-white shadow-lg">
 //               <div class="text-2xl mb-2">🏦</div>
 //               <p class="text-sm opacity-90">Company Profit</p>
 //               <h4 class="text-xl font-bold mt-1">$${registration.companyEarnings}</h4>
 //             </div>
 //           </div>
-          
+
 //           <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-xl">
 //             <h5 class="font-semibold text-gray-700 dark:text-gray-300 mb-3">Distribution Breakdown</h5>
 //             <div class="relative h-8 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden mb-4">
-//               <div class="absolute left-0 top-0 h-full bg-gradient-to-r from-red-500 to-pink-600 rounded-l-full" 
+//               <div class="absolute left-0 top-0 h-full bg-gradient-to-r from-red-500 to-pink-600 rounded-l-full"
 //                    style="width: ${(registration.parentsPayout / registration.registrationAmount) * 100}%">
 //                 <span class="absolute inset-0 flex items-center justify-center text-xs font-bold text-white">
 //                   Parents (${((registration.parentsPayout / registration.registrationAmount) * 100).toFixed(1)}%)
 //                 </span>
 //               </div>
-//               <div class="absolute right-0 top-0 h-full bg-gradient-to-r from-green-500 to-emerald-600 rounded-r-full" 
+//               <div class="absolute right-0 top-0 h-full bg-gradient-to-r from-green-500 to-emerald-600 rounded-r-full"
 //                    style="width: ${(registration.companyEarnings / registration.registrationAmount) * 100}%">
 //                 <span class="absolute inset-0 flex items-center justify-content: center; justify-content: center text-xs font-bold text-white">
 //                   Company (${((registration.companyEarnings / registration.registrationAmount) * 100).toFixed(1)}%)
@@ -284,7 +284,7 @@
 //               </div>
 //             </div>
 //           </div>
-          
+
 //           <div class="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 p-4 rounded-xl border border-blue-100 dark:border-gray-700">
 //             <div class="grid grid-cols-2 gap-4">
 //               <div>
@@ -307,7 +307,7 @@
 //               </div>
 //             </div>
 //           </div>
-          
+
 //           <div class="flex justify-center space-x-3">
 //             <button onclick="Swal.close()" class="px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all font-medium">
 //               Close Details
@@ -339,12 +339,12 @@
 //       reg.date,
 //       reg.status
 //     ]);
-    
+
 //     const csvContent = [
 //       headers.join(','),
 //       ...csvData.map(row => row.join(','))
 //     ].join('\n');
-    
+
 //     const blob = new Blob([csvContent], { type: 'text/csv' });
 //     const url = window.URL.createObjectURL(blob);
 //     const a = document.createElement('a');
@@ -388,7 +388,7 @@
 //               Comprehensive overview of user registrations and revenue distribution
 //             </p>
 //           </div>
-          
+
 //           <div className="flex flex-wrap gap-3">
 //             <button
 //               onClick={() => fetchRegistrationReport(true)}
@@ -399,7 +399,7 @@
 //               <FaChartLine className={refreshing ? "animate-spin" : "group-hover:rotate-12 transition-transform"} />
 //               <span className="font-semibold">{refreshing ? "Refreshing..." : "Refresh Data"}</span>
 //             </button>
-            
+
 //             <button
 //               onClick={exportToCSV}
 //               className="group px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl hover:from-green-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-3"
@@ -413,40 +413,40 @@
 //         {/* Stats Cards */}
 //         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 //           {[
-//             { 
-//               title: "Total Registrations", 
-//               value: stats.totalRegistrations, 
+//             {
+//               title: "Total Registrations",
+//               value: stats.totalRegistrations,
 //               icon: <FaUsers className="text-3xl" />,
 //               color: "from-blue-500 to-blue-600",
 //               bgColor: "bg-blue-500/10",
 //               textColor: "text-blue-600"
 //             },
-//             { 
-//               title: "Registration Revenue", 
-//               value: `$${stats.totalRegistrationAmount}`, 
+//             {
+//               title: "Registration Revenue",
+//               value: `$${stats.totalRegistrationAmount}`,
 //               icon: <FaMoneyBillWave className="text-3xl" />,
 //               color: "from-green-500 to-emerald-600",
 //               bgColor: "bg-green-500/10",
 //               textColor: "text-green-600"
 //             },
-//             { 
-//               title: "Parents Payout", 
-//               value: `$${stats.totalParentsPayout}`, 
+//             {
+//               title: "Parents Payout",
+//               value: `$${stats.totalParentsPayout}`,
 //               icon: <FaUserFriends className="text-3xl" />,
 //               color: "from-orange-500 to-red-600",
 //               bgColor: "bg-orange-500/10",
 //               textColor: "text-orange-600"
 //             },
-//             { 
-//               title: "Company Earnings", 
-//               value: `$${stats.totalCompanyEarnings}`, 
+//             {
+//               title: "Company Earnings",
+//               value: `$${stats.totalCompanyEarnings}`,
 //               icon: <FaWallet className="text-3xl" />,
 //               color: "from-purple-500 to-pink-600",
 //               bgColor: "bg-purple-500/10",
 //               textColor: "text-purple-600"
 //             }
 //           ].map((stat, index) => (
-//             <div 
+//             <div
 //               key={index}
 //               className="group bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 p-6 border border-gray-200 dark:border-gray-700"
 //             >
@@ -462,7 +462,7 @@
 //               <h3 className="text-3xl font-bold text-gray-900 dark:text-white">{stat.value}</h3>
 //               <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
 //                 <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-//                   <div 
+//                   <div
 //                     className={`h-2 rounded-full bg-gradient-to-r ${stat.color} transition-all duration-1000`}
 //                     style={{ width: '100%' }}
 //                   ></div>
@@ -487,7 +487,7 @@
 //                 />
 //               </div>
 //             </div>
-            
+
 //             <div className="flex items-center gap-4">
 //               <div className="flex items-center gap-3">
 //                 <FaFilter className="text-gray-500 dark:text-gray-400" />
@@ -502,7 +502,7 @@
 //                   <option value="month">Last 30 Days</option>
 //                 </select>
 //               </div>
-              
+
 //               <div className="text-sm text-gray-500 dark:text-gray-400">
 //                 Showing <span className="font-bold text-gray-900 dark:text-white">{filteredRegistrations.length}</span> of {registrations.length} registrations
 //               </div>
@@ -524,7 +524,7 @@
 //               </div>
 //             </div>
 //           </div>
-          
+
 //           <div className="overflow-x-auto">
 //             <table className="w-full">
 //               <thead className="bg-gray-50 dark:bg-gray-700">
@@ -576,8 +576,8 @@
 //               </thead>
 //               <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
 //                 {filteredRegistrations.map((reg) => (
-//                   <tr 
-//                     key={reg.id} 
+//                   <tr
+//                     key={reg.id}
 //                     className={`
 //                       hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-all duration-300
 //                       ${selectedRow === reg.id ? 'bg-blue-50 dark:bg-blue-900/20' : ''}
@@ -643,7 +643,7 @@
 //                             ${reg.companyEarnings}
 //                           </span>
 //                           <div className="w-24 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden mt-1">
-//                             <div 
+//                             <div
 //                               className="h-full bg-gradient-to-r from-green-500 to-emerald-600"
 //                               style={{ width: `${(reg.companyEarnings / reg.registrationAmount) * 100}%` }}
 //                             ></div>
@@ -674,7 +674,7 @@
 //                 ))}
 //               </tbody>
 //             </table>
-            
+
 //             {filteredRegistrations.length === 0 && (
 //               <div className="text-center py-16">
 //                 <div className="w-24 h-24 bg-gradient-to-r from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-800 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -684,8 +684,8 @@
 //                   No Registration Data Found
 //                 </h3>
 //                 <p className="text-gray-400 dark:text-gray-500 max-w-md mx-auto">
-//                   {searchTerm || dateFilter !== 'all' 
-//                     ? 'Try adjusting your search or filter criteria' 
+//                   {searchTerm || dateFilter !== 'all'
+//                     ? 'Try adjusting your search or filter criteria'
 //                     : 'No registration transactions available at the moment'}
 //                 </p>
 //                 {(searchTerm || dateFilter !== 'all') && (
@@ -702,7 +702,7 @@
 //               </div>
 //             )}
 //           </div>
-          
+
 //           {/* Footer Summary */}
 //           {filteredRegistrations.length > 0 && (
 //             <div className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 px-8 py-6 border-t border-gray-200 dark:border-gray-700">

@@ -13,7 +13,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 const API_URL = import.meta.env.VITE_API_URL;
-// const API_BASE_URL = "http://localhost:5000/api/contacts";
+// const API_BASE_URL = "https://api.gtnworld.live/api/contacts";
 
 export default function ContactUs() {
   const [searchTerm, setSearchTerm] = useState("");

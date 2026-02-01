@@ -1,73 +1,73 @@
 // API Configuration
 const API_CONFIG = {
-  BASE_URL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000',
-  VERSION: import.meta.env.VITE_API_VERSION || 'api',
+  BASE_URL: import.meta.env.VITE_API_BASE_URL || "https://api.gtnworld.live",
+  VERSION: import.meta.env.VITE_API_VERSION || "api",
 };
 
 // Complete API Endpoints - Based on Backend Flow Documentation
 export const API_ENDPOINTS = {
   // 🔐 Authentication APIs
-  USER_REGISTER: '/auth/register',
-  USER_LOGIN: '/auth/login', 
-  GET_ALL_USERS: '/auth/Getuser',
-  DELETE_USER: '/auth/delete', // DELETE /auth/delete/:id
+  USER_REGISTER: "/auth/register",
+  USER_LOGIN: "/auth/login",
+  GET_ALL_USERS: "/auth/Getuser",
+  DELETE_USER: "/auth/delete", // DELETE /auth/delete/:id
 
   // 🏢 SuperAdmin APIs
-  ADMIN_REGISTER: '/SuperAdmin/register',
-  ADMIN_LOGIN: '/auth/login',
-  COMPANY_BALANCE: '/admin/company-balance',
-  COMPANY_TRANSACTIONS: '/admin/company-transactions',
-  DEMO_ADD_BALANCE: '/admin/demo-add-balance',
+  ADMIN_REGISTER: "/SuperAdmin/register",
+  ADMIN_LOGIN: "/auth/login",
+  COMPANY_BALANCE: "/admin/company-balance",
+  COMPANY_TRANSACTIONS: "/admin/company-transactions",
+  DEMO_ADD_BALANCE: "/admin/demo-add-balance",
 
   // 👤 User Management APIs
-  USER_PROFILE: '/user/profile',
-  USER_DASHBOARD: '/user/dashboard',
-  USER_TRANSACTIONS: '/user/transactions',
-  MLM_TREE: '/user/mlm-tree',
-  MLM_EARNINGS: '/user/mlm-earnings',
-  USER_TEAM: '/user/team',
+  USER_PROFILE: "/user/profile",
+  USER_DASHBOARD: "/user/dashboard",
+  USER_TRANSACTIONS: "/user/transactions",
+  MLM_TREE: "/user/mlm-tree",
+  MLM_EARNINGS: "/user/mlm-earnings",
+  USER_TEAM: "/user/team",
 
   // 💰 Wallet Operations APIs
-  ACTIVATE_WALLET: '/wallet/activate',
-  GET_BALANCE: '/wallet/balance',
-  WALLET_TRANSACTIONS: '/wallet/transactions',
-  WITHDRAW_FUNDS: '/wallet/withdraw',
+  ACTIVATE_WALLET: "/wallet/activate",
+  GET_BALANCE: "/wallet/balance",
+  WALLET_TRANSACTIONS: "/wallet/transactions",
+  WITHDRAW_FUNDS: "/wallet/withdraw",
 
   // 🎨 NFT System APIs
-  NFT_INITIALIZE: '/nft/initialize',
-  NFT_STATUS: '/nft/status',
-  NFT_MARKETPLACE: '/nft/marketplace',
-  BUY_PRELAUNCH_NFT: '/nft/buy-prelaunch',
-  BUY_TRADING_NFT: '/nft/buy-trading',
-  SELL_NFT: '/nft/sell', // DELETE /nft/sell/:id
-  MY_NFTS: '/nft/my-nfts',
-  STAKE_NFT: '/nft/stake',
-  BURN_NFT: '/nft/burn',
-  LAUNCH_BLOCKCHAIN: '/nft/launch-blockchain',
+  NFT_INITIALIZE: "/nft/initialize",
+  NFT_STATUS: "/nft/status",
+  NFT_MARKETPLACE: "/nft/marketplace",
+  BUY_PRELAUNCH_NFT: "/nft/buy-prelaunch",
+  BUY_TRADING_NFT: "/nft/buy-trading",
+  SELL_NFT: "/nft/sell", // DELETE /nft/sell/:id
+  MY_NFTS: "/nft/my-nfts",
+  STAKE_NFT: "/nft/stake",
+  BURN_NFT: "/nft/burn",
+  LAUNCH_BLOCKCHAIN: "/nft/launch-blockchain",
 
   // 📦 Package Management APIs
-  PACKAGE_PLANS: '/package/plans',
-  PACKAGE_UPGRADE: '/package/upgrade',
-  PACKAGE_CURRENT: '/package/current',
+  PACKAGE_PLANS: "/package/plans",
+  PACKAGE_UPGRADE: "/package/upgrade",
+  PACKAGE_CURRENT: "/package/current",
 
   // ⚙️ Admin Management APIs
-  ADMIN_DASHBOARD: '/admin/dashboard',
-  ADMIN_USERS: '/admin/users',
-  ADMIN_FREEZE_USER: '/admin/users', // PATCH /admin/users/:id/freeze
-  ADMIN_TRADING_CONTROL: '/admin/users', // PATCH /admin/users/:id/trading
-  ADMIN_WITHDRAWAL_CONTROL: '/admin/users', // PATCH /admin/users/:id/withdrawal
-  ADMIN_NFTS: '/admin/nfts',
-  ADMIN_USER_NFTS: '/admin/user', // GET /admin/user/:id/nfts
-  ADMIN_CREATE_BATCH: '/admin/nft-batch',
-  ADMIN_UNLOCK_BATCH: '/admin/nft-batch', // PATCH /admin/nft-batch/:id/unlock
-  ADMIN_MLM_STATS: '/admin/mlm-stats',
+  ADMIN_DASHBOARD: "/admin/dashboard",
+  ADMIN_USERS: "/admin/users",
+  ADMIN_FREEZE_USER: "/admin/users", // PATCH /admin/users/:id/freeze
+  ADMIN_TRADING_CONTROL: "/admin/users", // PATCH /admin/users/:id/trading
+  ADMIN_WITHDRAWAL_CONTROL: "/admin/users", // PATCH /admin/users/:id/withdrawal
+  ADMIN_NFTS: "/admin/nfts",
+  ADMIN_USER_NFTS: "/admin/user", // GET /admin/user/:id/nfts
+  ADMIN_CREATE_BATCH: "/admin/nft-batch",
+  ADMIN_UNLOCK_BATCH: "/admin/nft-batch", // PATCH /admin/nft-batch/:id/unlock
+  ADMIN_MLM_STATS: "/admin/mlm-stats",
 
   // 🔄 MLM System APIs
-  MLM_STATS: '/mlm/stats',
-  MLM_EARNINGS: '/mlm/earnings',
+  MLM_STATS: "/mlm/stats",
+  MLM_EARNINGS: "/mlm/earnings",
 
   // 🔧 System Utils
-  SERVER_TEST: '/test',
+  SERVER_TEST: "/test",
 };
 
 // Build complete API URL
@@ -97,7 +97,7 @@ export const getDefaultHeaders = (includeAuth = true) => {
     if (token) {
       headers.Authorization = `Bearer ${token}`;
     } else {
-      console.warn('No authentication token found');
+      console.warn("No authentication token found");
     }
   }
 

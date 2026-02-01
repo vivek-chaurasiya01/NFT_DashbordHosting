@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FaLock, FaEnvelope, FaRocket } from "react-icons/fa";
 
-
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,16 +14,19 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/SuperAdmin/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        "https://api.gtnworld.live/api/SuperAdmin/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
         },
-        body: JSON.stringify({
-          email,
-          password
-        })
-      });
+      );
 
       const data = await response.json();
 
@@ -67,19 +69,22 @@ export default function Login() {
         <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
         <div className="absolute top-40 right-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
         <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
-        
+
         {/* Grid Pattern */}
-        <div className="absolute inset-0" style={{
-          backgroundImage: `linear-gradient(rgba(139, 92, 246, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(139, 92, 246, 0.1) 1px, transparent 1px)`,
-          backgroundSize: '50px 50px'
-        }}></div>
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `linear-gradient(rgba(139, 92, 246, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(139, 92, 246, 0.1) 1px, transparent 1px)`,
+            backgroundSize: "50px 50px",
+          }}
+        ></div>
       </div>
 
       {/* Login Card */}
       <div className="relative w-full max-w-md z-10">
         {/* Glow Effect */}
         <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 rounded-3xl blur opacity-75 animate-pulse"></div>
-        
+
         <div className="relative bg-gray-900/90 backdrop-blur-xl rounded-3xl shadow-2xl border border-purple-500/30 overflow-hidden">
           {/* Header with Icon */}
           <div className="bg-gradient-to-r from-purple-600 via-purple-500 to-blue-600 p-8 text-center relative overflow-hidden">
@@ -88,8 +93,12 @@ export default function Login() {
               <div className="w-20 h-20 mx-auto mb-4 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm animate-bounce">
                 <FaRocket size={40} className="text-white" />
               </div>
-              <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">NFT Trading</h1>
-              <p className="text-purple-200 text-sm font-medium">Admin Dashboard Login</p>
+              <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">
+                NFT Trading
+              </h1>
+              <p className="text-purple-200 text-sm font-medium">
+                Admin Dashboard Login
+              </p>
             </div>
           </div>
 
@@ -143,9 +152,25 @@ export default function Login() {
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
-                  <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  <svg
+                    className="animate-spin h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
                   </svg>
                   Logging in...
                 </span>

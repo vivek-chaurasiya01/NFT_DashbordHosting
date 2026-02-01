@@ -4,58 +4,64 @@
 
 **Total APIs:** 25 endpoints
 **Categories:** 6 main sections
-**Base URL:** `http://localhost:5000`
+**Base URL:** `https://api.gtnworld.live`
 
 ### 🔍 **Category-wise Status**
 
 #### **🔐 Authentication (3 APIs)**
-| API | Method | Status | Frontend Ready | Test Command |
-|-----|--------|--------|----------------|--------------|
-| User Register | POST /api/auth/register | ❌ NEEDS BACKEND | ✅ Ready | `curl -X POST {{baseUrl}}/api/auth/register` |
-| User Login | POST /api/auth/login | ❌ NEEDS BACKEND | ✅ Ready | `curl -X POST {{baseUrl}}/api/auth/login` |
-| Get All Users | GET /api/auth/Getuser | ✅ WORKING | ✅ Ready | `curl -X GET {{baseUrl}}/api/auth/Getuser` |
+
+| API           | Method                  | Status           | Frontend Ready | Test Command                                 |
+| ------------- | ----------------------- | ---------------- | -------------- | -------------------------------------------- |
+| User Register | POST /api/auth/register | ❌ NEEDS BACKEND | ✅ Ready       | `curl -X POST {{baseUrl}}/api/auth/register` |
+| User Login    | POST /api/auth/login    | ❌ NEEDS BACKEND | ✅ Ready       | `curl -X POST {{baseUrl}}/api/auth/login`    |
+| Get All Users | GET /api/auth/Getuser   | ✅ WORKING       | ✅ Ready       | `curl -X GET {{baseUrl}}/api/auth/Getuser`   |
 
 #### **🏢 SuperAdmin (4 APIs)**
-| API | Method | Status | Frontend Ready | Test Command |
-|-----|--------|--------|----------------|--------------|
-| Admin Register | POST /api/SuperAdmin/register | ❌ NEEDS BACKEND | ✅ Ready | `curl -X POST {{baseUrl}}/api/SuperAdmin/register` |
-| Admin Login | POST /api/SuperAdmin/login | ✅ WORKING | ✅ Ready | `curl -X POST {{baseUrl}}/api/SuperAdmin/login` |
-| Company Balance | GET /api/SuperAdmin/company-balance | ❌ NEEDS BACKEND | ✅ Ready | `curl -X GET {{baseUrl}}/api/SuperAdmin/company-balance` |
-| Company Transactions | GET /api/SuperAdmin/company-transactions | ✅ WORKING | ✅ Ready | `curl -X GET {{baseUrl}}/api/SuperAdmin/company-transactions` |
+
+| API                  | Method                                   | Status           | Frontend Ready | Test Command                                                  |
+| -------------------- | ---------------------------------------- | ---------------- | -------------- | ------------------------------------------------------------- |
+| Admin Register       | POST /api/SuperAdmin/register            | ❌ NEEDS BACKEND | ✅ Ready       | `curl -X POST {{baseUrl}}/api/SuperAdmin/register`            |
+| Admin Login          | POST /api/SuperAdmin/login               | ✅ WORKING       | ✅ Ready       | `curl -X POST {{baseUrl}}/api/SuperAdmin/login`               |
+| Company Balance      | GET /api/SuperAdmin/company-balance      | ❌ NEEDS BACKEND | ✅ Ready       | `curl -X GET {{baseUrl}}/api/SuperAdmin/company-balance`      |
+| Company Transactions | GET /api/SuperAdmin/company-transactions | ✅ WORKING       | ✅ Ready       | `curl -X GET {{baseUrl}}/api/SuperAdmin/company-transactions` |
 
 #### **💰 Wallet Operations (3 APIs)**
-| API | Method | Status | Frontend Ready | Test Command |
-|-----|--------|--------|----------------|--------------|
-| Activate Wallet | POST /api/wallet/activate | ❌ NEEDS BACKEND | ✅ Ready | `curl -X POST {{baseUrl}}/api/wallet/activate` |
-| Get Balance | GET /api/wallet/balance | ❌ NEEDS BACKEND | ✅ Ready | `curl -X GET {{baseUrl}}/api/wallet/balance` |
-| Withdraw Funds | POST /api/wallet/withdraw | ❌ NEEDS BACKEND | ✅ Ready | `curl -X POST {{baseUrl}}/api/wallet/withdraw` |
+
+| API             | Method                    | Status           | Frontend Ready | Test Command                                   |
+| --------------- | ------------------------- | ---------------- | -------------- | ---------------------------------------------- |
+| Activate Wallet | POST /api/wallet/activate | ❌ NEEDS BACKEND | ✅ Ready       | `curl -X POST {{baseUrl}}/api/wallet/activate` |
+| Get Balance     | GET /api/wallet/balance   | ❌ NEEDS BACKEND | ✅ Ready       | `curl -X GET {{baseUrl}}/api/wallet/balance`   |
+| Withdraw Funds  | POST /api/wallet/withdraw | ❌ NEEDS BACKEND | ✅ Ready       | `curl -X POST {{baseUrl}}/api/wallet/withdraw` |
 
 #### **🎨 NFT System (7 APIs)**
-| API | Method | Status | Frontend Ready | Test Command |
-|-----|--------|--------|----------------|--------------|
-| Initialize System | POST /api/nft/initialize | ❌ NEEDS BACKEND | ✅ Ready | `curl -X POST {{baseUrl}}/api/nft/initialize` |
-| Get Marketplace | GET /api/nft/marketplace | ⚠️ PARTIAL | ✅ Ready | `curl -X GET {{baseUrl}}/api/nft/marketplace` |
-| Buy Pre-launch NFT | POST /api/nft/buy-prelaunch | ❌ NEEDS BACKEND | ✅ Ready | `curl -X POST {{baseUrl}}/api/nft/buy-prelaunch` |
-| Buy Trading NFT | POST /api/nft/buy-trading | ❌ NEEDS BACKEND | ✅ Ready | `curl -X POST {{baseUrl}}/api/nft/buy-trading` |
-| Sell NFT | POST /api/nft/sell/:nftId | ❌ NEEDS BACKEND | ✅ Ready | `curl -X POST {{baseUrl}}/api/nft/sell/NFT_ID` |
-| My NFTs | GET /api/nft/my-nfts | ⚠️ PARTIAL | ✅ Ready | `curl -X GET {{baseUrl}}/api/nft/my-nfts` |
-| NFT Status | GET /api/nft/status | ❌ NEEDS BACKEND | ✅ Ready | `curl -X GET {{baseUrl}}/api/nft/status` |
+
+| API                | Method                      | Status           | Frontend Ready | Test Command                                     |
+| ------------------ | --------------------------- | ---------------- | -------------- | ------------------------------------------------ |
+| Initialize System  | POST /api/nft/initialize    | ❌ NEEDS BACKEND | ✅ Ready       | `curl -X POST {{baseUrl}}/api/nft/initialize`    |
+| Get Marketplace    | GET /api/nft/marketplace    | ⚠️ PARTIAL       | ✅ Ready       | `curl -X GET {{baseUrl}}/api/nft/marketplace`    |
+| Buy Pre-launch NFT | POST /api/nft/buy-prelaunch | ❌ NEEDS BACKEND | ✅ Ready       | `curl -X POST {{baseUrl}}/api/nft/buy-prelaunch` |
+| Buy Trading NFT    | POST /api/nft/buy-trading   | ❌ NEEDS BACKEND | ✅ Ready       | `curl -X POST {{baseUrl}}/api/nft/buy-trading`   |
+| Sell NFT           | POST /api/nft/sell/:nftId   | ❌ NEEDS BACKEND | ✅ Ready       | `curl -X POST {{baseUrl}}/api/nft/sell/NFT_ID`   |
+| My NFTs            | GET /api/nft/my-nfts        | ⚠️ PARTIAL       | ✅ Ready       | `curl -X GET {{baseUrl}}/api/nft/my-nfts`        |
+| NFT Status         | GET /api/nft/status         | ❌ NEEDS BACKEND | ✅ Ready       | `curl -X GET {{baseUrl}}/api/nft/status`         |
 
 #### **👤 User Management (4 APIs)**
-| API | Method | Status | Frontend Ready | Test Command |
-|-----|--------|--------|----------------|--------------|
-| User Profile | GET /api/user/profile | ❌ NEEDS BACKEND | ✅ Ready | `curl -X GET {{baseUrl}}/api/user/profile` |
-| User Dashboard | GET /api/user/dashboard | ❌ NEEDS BACKEND | ✅ Ready | `curl -X GET {{baseUrl}}/api/user/dashboard` |
-| MLM Tree | GET /api/user/mlm-tree | ❌ NEEDS BACKEND | ✅ Ready | `curl -X GET {{baseUrl}}/api/user/mlm-tree` |
-| User Transactions | GET /api/user/transactions | ❌ NEEDS BACKEND | ✅ Ready | `curl -X GET {{baseUrl}}/api/user/transactions` |
+
+| API               | Method                     | Status           | Frontend Ready | Test Command                                    |
+| ----------------- | -------------------------- | ---------------- | -------------- | ----------------------------------------------- |
+| User Profile      | GET /api/user/profile      | ❌ NEEDS BACKEND | ✅ Ready       | `curl -X GET {{baseUrl}}/api/user/profile`      |
+| User Dashboard    | GET /api/user/dashboard    | ❌ NEEDS BACKEND | ✅ Ready       | `curl -X GET {{baseUrl}}/api/user/dashboard`    |
+| MLM Tree          | GET /api/user/mlm-tree     | ❌ NEEDS BACKEND | ✅ Ready       | `curl -X GET {{baseUrl}}/api/user/mlm-tree`     |
+| User Transactions | GET /api/user/transactions | ❌ NEEDS BACKEND | ✅ Ready       | `curl -X GET {{baseUrl}}/api/user/transactions` |
 
 #### **🏗️ Admin Settings (4 APIs)**
-| API | Method | Status | Frontend Ready | Test Command |
-|-----|--------|--------|----------------|--------------|
-| Create NFT Batch | POST /api/admin-settings/nft/create-batch | ❌ NEEDS BACKEND | ✅ Ready | `curl -X POST {{baseUrl}}/api/admin-settings/nft/create-batch` |
-| NFT Stats | GET /api/admin-settings/nft/stats | ❌ NEEDS BACKEND | ✅ Ready | `curl -X GET {{baseUrl}}/api/admin-settings/nft/stats` |
-| Get All Users | GET /api/admin-settings/users | ❌ NEEDS BACKEND | ✅ Ready | `curl -X GET {{baseUrl}}/api/admin-settings/users` |
-| Adjust Balance | PUT /api/admin-settings/users/:id/balance | ❌ NEEDS BACKEND | ✅ Ready | `curl -X PUT {{baseUrl}}/api/admin-settings/users/ID/balance` |
+
+| API              | Method                                    | Status           | Frontend Ready | Test Command                                                   |
+| ---------------- | ----------------------------------------- | ---------------- | -------------- | -------------------------------------------------------------- |
+| Create NFT Batch | POST /api/admin-settings/nft/create-batch | ❌ NEEDS BACKEND | ✅ Ready       | `curl -X POST {{baseUrl}}/api/admin-settings/nft/create-batch` |
+| NFT Stats        | GET /api/admin-settings/nft/stats         | ❌ NEEDS BACKEND | ✅ Ready       | `curl -X GET {{baseUrl}}/api/admin-settings/nft/stats`         |
+| Get All Users    | GET /api/admin-settings/users             | ❌ NEEDS BACKEND | ✅ Ready       | `curl -X GET {{baseUrl}}/api/admin-settings/users`             |
+| Adjust Balance   | PUT /api/admin-settings/users/:id/balance | ❌ NEEDS BACKEND | ✅ Ready       | `curl -X PUT {{baseUrl}}/api/admin-settings/users/ID/balance`  |
 
 ---
 
@@ -64,8 +70,9 @@
 ### **✅ Working APIs (3/25)**
 
 #### **1. SuperAdmin Login**
+
 ```bash
-curl -X POST http://localhost:5000/api/SuperAdmin/login \
+curl -X POST https://api.gtnworld.live/api/SuperAdmin/login \
   -H "Content-Type: application/json" \
   -d '{"email":"admin@example.com","password":"admin123"}'
 
@@ -83,8 +90,9 @@ curl -X POST http://localhost:5000/api/SuperAdmin/login \
 ```
 
 #### **2. Get All Users**
+
 ```bash
-curl -X GET http://localhost:5000/api/auth/Getuser \
+curl -X GET https://api.gtnworld.live/api/auth/Getuser \
   -H "Authorization: Bearer YOUR_TOKEN"
 
 # Expected Response:
@@ -104,8 +112,9 @@ curl -X GET http://localhost:5000/api/auth/Getuser \
 ```
 
 #### **3. Company Transactions**
+
 ```bash
-curl -X GET http://localhost:5000/api/SuperAdmin/company-transactions \
+curl -X GET https://api.gtnworld.live/api/SuperAdmin/company-transactions \
   -H "Authorization: Bearer YOUR_TOKEN"
 
 # Expected Response:
@@ -125,8 +134,9 @@ curl -X GET http://localhost:5000/api/SuperAdmin/company-transactions \
 #### **High Priority APIs to Implement:**
 
 ##### **1. User Registration**
+
 ```bash
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST https://api.gtnworld.live/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "name": "John Doe",
@@ -154,8 +164,9 @@ curl -X POST http://localhost:5000/api/auth/register \
 ```
 
 ##### **2. NFT System Initialize**
+
 ```bash
-curl -X POST http://localhost:5000/api/nft/initialize \
+curl -X POST https://api.gtnworld.live/api/nft/initialize \
   -H "Authorization: Bearer ADMIN_TOKEN"
 
 # Expected Response:
@@ -171,8 +182,9 @@ curl -X POST http://localhost:5000/api/nft/initialize \
 ```
 
 ##### **3. Wallet Activation**
+
 ```bash
-curl -X POST http://localhost:5000/api/wallet/activate \
+curl -X POST https://api.gtnworld.live/api/wallet/activate \
   -H "Authorization: Bearer USER_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -196,6 +208,7 @@ curl -X POST http://localhost:5000/api/wallet/activate \
 ## 📊 **Business Logic Implementation**
 
 ### **MLM System Logic:**
+
 ```javascript
 // Registration Payment Distribution
 Basic Plan ($10):
@@ -203,11 +216,12 @@ Basic Plan ($10):
 - Remaining to company
 
 Premium Plan ($20):
-- $1 to each parent (max 10 levels)  
+- $1 to each parent (max 10 levels)
 - Remaining to company
 ```
 
 ### **NFT Trading Logic:**
+
 ```javascript
 // NFT Sale Distribution (40-40-20)
 Sale Price: $20
@@ -217,6 +231,7 @@ Sale Price: $20
 ```
 
 ### **Hold/Sell System:**
+
 ```javascript
 // Smart NFT Management
 First Purchase ($20):
@@ -233,6 +248,7 @@ Subsequent Purchases:
 ## 🎯 **Frontend Integration Status**
 
 ### **Updated Components:**
+
 1. ✅ **api.js** - All endpoints updated according to documentation
 2. ✅ **Login.jsx** - SuperAdmin login working
 3. ✅ **UserManagement.jsx** - User list and deletion working
@@ -241,6 +257,7 @@ Subsequent Purchases:
 6. ✅ **Overview.jsx** - Dashboard ready for all data
 
 ### **Component-API Mapping:**
+
 ```javascript
 Login.jsx → POST /api/SuperAdmin/login ✅
 UserManagement.jsx → GET /api/auth/Getuser ✅
@@ -254,10 +271,11 @@ Overview.jsx → Multiple APIs ❌ (Ready)
 ## 📋 **Implementation Roadmap**
 
 ### **Phase 1: Core System (Week 1)**
+
 ```javascript
 Priority: HIGH
 1. POST /api/auth/register
-2. POST /api/wallet/activate  
+2. POST /api/wallet/activate
 3. POST /api/nft/initialize
 4. GET /api/nft/marketplace
 5. GET /api/user/profile
@@ -265,6 +283,7 @@ Priority: HIGH
 ```
 
 ### **Phase 2: Trading System (Week 2)**
+
 ```javascript
 Priority: HIGH
 1. POST /api/nft/buy-prelaunch
@@ -276,6 +295,7 @@ Priority: HIGH
 ```
 
 ### **Phase 3: Admin Features (Week 3)**
+
 ```javascript
 Priority: MEDIUM
 1. POST /api/admin-settings/nft/create-batch
@@ -290,13 +310,13 @@ Priority: MEDIUM
 
 ## 🎉 **Current Status Summary**
 
-| Metric | Count | Percentage |
-|--------|-------|------------|
-| **Total APIs** | 25 | 100% |
-| **Working APIs** | 3 | 12% |
-| **Partial APIs** | 2 | 8% |
-| **Missing APIs** | 20 | 80% |
-| **Frontend Ready** | 25 | 100% |
+| Metric             | Count | Percentage |
+| ------------------ | ----- | ---------- |
+| **Total APIs**     | 25    | 100%       |
+| **Working APIs**   | 3     | 12%        |
+| **Partial APIs**   | 2     | 8%         |
+| **Missing APIs**   | 20    | 80%        |
+| **Frontend Ready** | 25    | 100%       |
 
 ---
 

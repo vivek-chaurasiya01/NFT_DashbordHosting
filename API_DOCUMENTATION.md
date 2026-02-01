@@ -1,12 +1,15 @@
 # 🚀 MLM Admin Panel - Complete API Documentation
 
 ## 📌 Base URL
+
 ```
-http://localhost:5000/api
+https://api.gtnworld.live/api
 ```
 
 ## 🔐 Authentication
+
 All admin routes require JWT token in header:
+
 ```javascript
 Headers: {
   "Authorization": "Bearer <your_jwt_token>",
@@ -19,11 +22,13 @@ Headers: {
 ## 1️⃣ **Authentication APIs**
 
 ### 🔹 Admin Login
+
 ```http
 POST /auth/admin/login
 ```
 
 **Request Body:**
+
 ```json
 {
   "email": "admin@example.com",
@@ -32,6 +37,7 @@ POST /auth/admin/login
 ```
 
 **Response (200 OK):**
+
 ```json
 {
   "success": true,
@@ -46,6 +52,7 @@ POST /auth/admin/login
 ```
 
 **Response (401 Unauthorized):**
+
 ```json
 {
   "success": false,
@@ -58,16 +65,19 @@ POST /auth/admin/login
 ## 2️⃣ **User Management APIs** ✅ (Already Implemented)
 
 ### 🔹 Get All Users
+
 ```http
 GET /auth/Getuser
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer <token>
 ```
 
 **Response (200 OK):**
+
 ```json
 {
   "success": true,
@@ -79,7 +89,7 @@ Authorization: Bearer <token>
       "mobile": "1234567890",
       "walletAddress": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
       "referralCode": "REF123",
-      "balance": 150.50,
+      "balance": 150.5,
       "level": 2,
       "currentPlan": "Premium",
       "isActive": true,
@@ -93,16 +103,19 @@ Authorization: Bearer <token>
 ```
 
 ### 🔹 Delete User
+
 ```http
 DELETE /auth/delete/:userId
 ```
 
 **Headers:**
+
 ```
 Authorization: Bearer <token>
 ```
 
 **Response (200 OK):**
+
 ```json
 {
   "success": true,
@@ -111,6 +124,7 @@ Authorization: Bearer <token>
 ```
 
 **Response (404 Not Found):**
+
 ```json
 {
   "success": false,
@@ -119,11 +133,13 @@ Authorization: Bearer <token>
 ```
 
 ### 🔹 Freeze/Unfreeze User
+
 ```http
 PUT /auth/freeze/:userId
 ```
 
 **Request Body:**
+
 ```json
 {
   "isFrozen": true
@@ -131,6 +147,7 @@ PUT /auth/freeze/:userId
 ```
 
 **Response (200 OK):**
+
 ```json
 {
   "success": true,
@@ -147,11 +164,13 @@ PUT /auth/freeze/:userId
 ## 3️⃣ **Dashboard Overview APIs**
 
 ### 🔹 Get Dashboard Stats
+
 ```http
 GET /dashboard/stats
 ```
 
 **Response (200 OK):**
+
 ```json
 {
   "success": true,
@@ -178,11 +197,13 @@ GET /dashboard/stats
 ## 4️⃣ **Root Wallet APIs**
 
 ### 🔹 Get Wallet Balance
+
 ```http
 GET /wallet/balance
 ```
 
 **Response (200 OK):**
+
 ```json
 {
   "success": true,
@@ -196,16 +217,19 @@ GET /wallet/balance
 ```
 
 ### 🔹 Get Wallet Transactions
+
 ```http
 GET /wallet/transactions
 ```
 
 **Query Parameters:**
+
 ```
 ?page=1&limit=10&sortBy=date&order=desc
 ```
 
 **Response (200 OK):**
+
 ```json
 {
   "success": true,
@@ -236,11 +260,13 @@ GET /wallet/transactions
 ## 5️⃣ **Multi-Parent Control APIs**
 
 ### 🔹 Get All Users with Parents
+
 ```http
 GET /parents/users
 ```
 
 **Response (200 OK):**
+
 ```json
 {
   "success": true,
@@ -270,11 +296,13 @@ GET /parents/users
 ```
 
 ### 🔹 Add Parent to User
+
 ```http
 POST /parents/add
 ```
 
 **Request Body:**
+
 ```json
 {
   "userId": "user_123",
@@ -283,6 +311,7 @@ POST /parents/add
 ```
 
 **Response (200 OK):**
+
 ```json
 {
   "success": true,
@@ -299,6 +328,7 @@ POST /parents/add
 ```
 
 **Response (400 Bad Request):**
+
 ```json
 {
   "success": false,
@@ -307,11 +337,13 @@ POST /parents/add
 ```
 
 ### 🔹 Remove Parent from User
+
 ```http
 DELETE /parents/remove
 ```
 
 **Request Body:**
+
 ```json
 {
   "userId": "user_123",
@@ -320,6 +352,7 @@ DELETE /parents/remove
 ```
 
 **Response (200 OK):**
+
 ```json
 {
   "success": true,
@@ -328,11 +361,13 @@ DELETE /parents/remove
 ```
 
 ### 🔹 Get User's Parent Details
+
 ```http
 GET /parents/user/:userId
 ```
 
 **Response (200 OK):**
+
 ```json
 {
   "success": true,
@@ -360,16 +395,19 @@ GET /parents/user/:userId
 ## 6️⃣ **Registration Report APIs**
 
 ### 🔹 Get Registration Distribution
+
 ```http
 GET /reports/registration
 ```
 
 **Query Parameters:**
+
 ```
 ?startDate=2024-01-01&endDate=2024-01-31&page=1&limit=20
 ```
 
 **Response (200 OK):**
+
 ```json
 {
   "success": true,
@@ -402,16 +440,19 @@ GET /reports/registration
 ```
 
 ### 🔹 Export Registration Report (CSV)
+
 ```http
 GET /reports/registration/export
 ```
 
 **Query Parameters:**
+
 ```
 ?format=csv&startDate=2024-01-01&endDate=2024-01-31
 ```
 
 **Response (200 OK):**
+
 ```
 Content-Type: text/csv
 Content-Disposition: attachment; filename="registration_report.csv"
@@ -425,16 +466,19 @@ John Doe,john@example.com,3,$3,$7,2024-01-15
 ## 7️⃣ **Analytics APIs**
 
 ### 🔹 Get Analytics Data
+
 ```http
 GET /analytics/stats
 ```
 
 **Query Parameters:**
+
 ```
 ?period=week (options: day, week, month, year)
 ```
 
 **Response (200 OK):**
+
 ```json
 {
   "success": true,
@@ -472,11 +516,13 @@ GET /analytics/stats
 ## 8️⃣ **Security Control APIs**
 
 ### 🔹 Get Security Alerts
+
 ```http
 GET /security/alerts
 ```
 
 **Response (200 OK):**
+
 ```json
 {
   "success": true,
@@ -504,11 +550,13 @@ GET /security/alerts
 ```
 
 ### 🔹 Get Blocked Actions
+
 ```http
 GET /security/blocked-actions
 ```
 
 **Response (200 OK):**
+
 ```json
 {
   "success": true,
@@ -528,11 +576,13 @@ GET /security/blocked-actions
 ```
 
 ### 🔹 Freeze Suspicious User
+
 ```http
 POST /security/freeze-user
 ```
 
 **Request Body:**
+
 ```json
 {
   "userId": "user_123",
@@ -542,6 +592,7 @@ POST /security/freeze-user
 ```
 
 **Response (200 OK):**
+
 ```json
 {
   "success": true,
@@ -559,11 +610,13 @@ POST /security/freeze-user
 ## 9️⃣ **System Settings APIs**
 
 ### 🔹 Get Current Settings
+
 ```http
 GET /settings
 ```
 
 **Response (200 OK):**
+
 ```json
 {
   "success": true,
@@ -580,11 +633,13 @@ GET /settings
 ```
 
 ### 🔹 Update System Settings
+
 ```http
 PUT /settings
 ```
 
 **Request Body:**
+
 ```json
 {
   "registrationAmount": 10,
@@ -596,6 +651,7 @@ PUT /settings
 ```
 
 **Response (200 OK):**
+
 ```json
 {
   "success": true,
@@ -611,6 +667,7 @@ PUT /settings
 ```
 
 **Response (400 Bad Request):**
+
 ```json
 {
   "success": false,
@@ -627,16 +684,19 @@ PUT /settings
 ## 🔟 **Additional Utility APIs**
 
 ### 🔹 Search Users
+
 ```http
 GET /users/search
 ```
 
 **Query Parameters:**
+
 ```
 ?q=john&field=name (fields: name, email, mobile, referralCode)
 ```
 
 **Response (200 OK):**
+
 ```json
 {
   "success": true,
@@ -652,11 +712,13 @@ GET /users/search
 ```
 
 ### 🔹 Get System Health
+
 ```http
 GET /system/health
 ```
 
 **Response (200 OK):**
+
 ```json
 {
   "success": true,
@@ -676,6 +738,7 @@ GET /system/health
 ### Common Error Codes:
 
 **400 Bad Request:**
+
 ```json
 {
   "success": false,
@@ -685,6 +748,7 @@ GET /system/health
 ```
 
 **401 Unauthorized:**
+
 ```json
 {
   "success": false,
@@ -693,6 +757,7 @@ GET /system/health
 ```
 
 **403 Forbidden:**
+
 ```json
 {
   "success": false,
@@ -701,6 +766,7 @@ GET /system/health
 ```
 
 **404 Not Found:**
+
 ```json
 {
   "success": false,
@@ -709,6 +775,7 @@ GET /system/health
 ```
 
 **500 Internal Server Error:**
+
 ```json
 {
   "success": false,
@@ -732,7 +799,7 @@ GET /system/health
 ## 🔧 **Testing with Postman:**
 
 1. Import this collection
-2. Set environment variable: `BASE_URL = http://localhost:5000/api`
+2. Set environment variable: `BASE_URL = https://api.gtnworld.live/api`
 3. After login, set `TOKEN` variable
 4. All requests will auto-include token
 

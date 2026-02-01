@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaCubes, FaPlay, FaEye, FaRocket, FaChartLine } from "react-icons/fa";
 
-// const API_BASE_URL = "http://localhost:5000/api/nft";
+// const API_BASE_URL = "https://api.gtnworld.live/api/nft";
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function NFTAdmin() {

@@ -112,7 +112,7 @@ export default function RootWallet() {
       if (!token) return;
 
       const response = await axios.get(
-        "http://localhost:5000/api/admin/users",
+        "https://api.gtnworld.live/api/admin/users",
         {
           headers: { Authorization: `Bearer ${token}` },
         },
@@ -477,9 +477,6 @@ export default function RootWallet() {
     (sum, tx) => sum + Math.abs(tx.amount),
     0,
   );
-
-
-  
 
   if (loading) {
     return (
