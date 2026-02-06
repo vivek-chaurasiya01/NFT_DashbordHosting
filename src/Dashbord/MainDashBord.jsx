@@ -18,6 +18,7 @@ import {
   FaBug,
   FaServer,
   FaEnvelope,
+  FaKey,
 } from "react-icons/fa";
 import { FiMoon, FiSun } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -78,6 +79,7 @@ export default function MainDashBord() {
     if (path.includes("mlm-hierarchy")) return "MLM Hierarchy";
     if (path.includes("contact-us")) return "Contact Us";
     if (path.includes("nft-admin")) return "NFT Admin";
+    if (path.includes("change-password")) return "Change Password";
     if (path.includes("api-testing")) return "API Testing";
     if (path.includes("nft-complete-system")) return "NFT Complete System";
     return "Dashboard";
@@ -134,12 +136,11 @@ export default function MainDashBord() {
           {[
             ["Dashboard", "/Dashbord", FaHome],
             ["Root Wallet", "/Dashbord/root-wallet", FaWallet],
-
             ["MLM Hierarchy", "/Dashbord/mlm-hierarchy", FaTree],
             ["Users", "/Dashbord/user-management", FaUserFriends],
             ["Contact Us", "/Dashbord/contact-us", FaEnvelope],
             ["NFT Admin", "/Dashbord/nft-admin", FaGem],
-            // ["API Testing", "/Dashbord/api-testing", FaServer],
+            // ["Change Password", "/Dashbord/change-password", FaKey],
             ["Analytics", "/Dashbord/analytics", FaChartBar],
           ].map(([label, path, Icon]) => (
             <NavLink

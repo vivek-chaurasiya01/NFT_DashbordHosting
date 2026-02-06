@@ -26,7 +26,7 @@ export default function SystemSettings() {
 
       // Fetch company balance from working API
       const balanceRes = await axios.get(
-        "http://api.gtnworld.live/api/admin/company-balance",
+        "https://api.gtnworld.live/api/admin/company-balance",
         {
           headers: { Authorization: `Bearer ${token}` },
         },
@@ -38,7 +38,7 @@ export default function SystemSettings() {
 
       // Fetch users for stats
       const usersRes = await axios.get(
-        "http://api.gtnworld.live/api/auth/Getuser",
+        "https://api.gtnworld.live/api/auth/Getuser",
         {
           headers: { Authorization: `Bearer ${token}` },
         },
@@ -331,19 +331,19 @@ export default function SystemSettings() {
 //       // Fetch core data first
 //       const [statsRes, usersRes, withdrawalsRes, settingsRes] =
 //         await Promise.all([
-//           axios.get("http://api.gtnworld.live/api/admin-settings/stats", {
+//           axios.get("https://api.gtnworld.live/api/admin-settings/stats", {
 //             headers: { Authorization: `Bearer ${token}` },
 //           }),
-//           axios.get("http://api.gtnworld.live/api/admin-settings/users", {
+//           axios.get("https://api.gtnworld.live/api/admin-settings/users", {
 //             headers: { Authorization: `Bearer ${token}` },
 //           }),
 //           axios.get(
-//             "http://api.gtnworld.live/api/admin-settings/withdrawals/pending",
+//             "https://api.gtnworld.live/api/admin-settings/withdrawals/pending",
 //             {
 //               headers: { Authorization: `Bearer ${token}` },
 //             },
 //           ),
-//           axios.get("http://api.gtnworld.live/api/admin-settings/settings", {
+//           axios.get("https://api.gtnworld.live/api/admin-settings/settings", {
 //             headers: { Authorization: `Bearer ${token}` },
 //           }),
 //         ]);
@@ -369,7 +369,7 @@ export default function SystemSettings() {
 //       // Fetch NFT stats separately with error handling
 //       try {
 //         const nftStatsRes = await axios.get(
-//           "http://api.gtnworld.live/api/admin-settings/nft/stats",
+//           "https://api.gtnworld.live/api/admin-settings/nft/stats",
 //           {
 //             headers: { Authorization: `Bearer ${token}` },
 //           },
@@ -447,7 +447,7 @@ export default function SystemSettings() {
 
 //       if (result.isConfirmed) {
 //         await axios.put(
-//           `http://api.gtnworld.live/api/admin-settings/users/${userId}/status`,
+//           `https://api.gtnworld.live/api/admin-settings/users/${userId}/status`,
 //           { action },
 //           { headers: { Authorization: `Bearer ${token}` } },
 //         );
@@ -500,7 +500,7 @@ export default function SystemSettings() {
 //         if (reason) {
 //           const token = getAdminToken();
 //           await axios.put(
-//             `http://api.gtnworld.live/api/admin-settings/users/${userId}/balance`,
+//             `https://api.gtnworld.live/api/admin-settings/users/${userId}/balance`,
 //             { amount: parseFloat(amount), type, reason },
 //             { headers: { Authorization: `Bearer ${token}` } },
 //           );
@@ -544,7 +544,7 @@ export default function SystemSettings() {
 
 //         if (txHash) {
 //           await axios.put(
-//             `http://api.gtnworld.live/api/admin-settings/withdrawals/${transactionId}/process`,
+//             `https://api.gtnworld.live/api/admin-settings/withdrawals/${transactionId}/process`,
 //             { action, txHash },
 //             { headers: { Authorization: `Bearer ${token}` } },
 //           );
@@ -572,7 +572,7 @@ export default function SystemSettings() {
 
 //         if (reason) {
 //           await axios.put(
-//             `http://api.gtnworld.live/api/admin-settings/withdrawals/${transactionId}/process`,
+//             `https://api.gtnworld.live/api/admin-settings/withdrawals/${transactionId}/process`,
 //             { action, reason },
 //             { headers: { Authorization: `Bearer ${token}` } },
 //           );
@@ -603,7 +603,7 @@ export default function SystemSettings() {
 //       const token = getAdminToken();
 
 //       const mlmRes = await axios.put(
-//         "http://api.gtnworld.live/api/admin-settings/settings",
+//         "https://api.gtnworld.live/api/admin-settings/settings",
 //         {
 //           settingType: "mlm",
 //           settings: mlmSettings,
@@ -612,7 +612,7 @@ export default function SystemSettings() {
 //       );
 
 //       const nftRes = await axios.put(
-//         "http://api.gtnworld.live/api/admin-settings/settings",
+//         "https://api.gtnworld.live/api/admin-settings/settings",
 //         {
 //           settingType: "nft",
 //           settings: nftSettings,
@@ -657,7 +657,7 @@ export default function SystemSettings() {
 //         const token = getAdminToken();
 //         try {
 //           await axios.post(
-//             "http://api.gtnworld.live/api/admin-settings/nft/create-batch",
+//             "https://api.gtnworld.live/api/admin-settings/nft/create-batch",
 //             { batchSize: parseInt(batchSize), basePrice: nftSettings.basePrice },
 //             { headers: { Authorization: `Bearer ${token}` } },
 //           );
@@ -713,7 +713,7 @@ export default function SystemSettings() {
 
 //       if (action === "freeze" || action === "unfreeze") {
 //         await axios.post(
-//           "http://api.gtnworld.live/api/admin-settings/users/bulk-action",
+//           "https://api.gtnworld.live/api/admin-settings/users/bulk-action",
 //           { userIds, action },
 //           { headers: { Authorization: `Bearer ${token}` } },
 //         );

@@ -443,6 +443,19 @@ export default function SuperAdminDashboard() {
     const totalTransactions =
       summary.transactionCount || allTransactions.length;
 
+    // Calculate Admin NFT Revenue
+    const adminNftTransactions = allTransactions.filter(
+      (tx) =>
+        tx.type === "Other" &&
+        (tx.description?.toLowerCase().includes("nft") ||
+          tx.description?.toLowerCase().includes("admin nft") ||
+          tx.description?.toLowerCase().includes("nft sale")),
+    );
+    const adminNftRevenue = adminNftTransactions.reduce(
+      (sum, tx) => sum + Math.abs(tx.amount || 0),
+      0,
+    );
+
     // Get MLM data from graph section of company-transactions API
     const mlmTreeResult = results.mlmTree;
     const mlmSummaryResult = results.mlmSummary;
@@ -504,13 +517,6 @@ export default function SuperAdminDashboard() {
     const upgradeTransactions = allTransactions.filter(
       (tx) => tx.type === "Upgrade",
     );
-    const adminNftTransactions = allTransactions.filter(
-      (tx) =>
-        tx.type === "Other" &&
-        (tx.description?.toLowerCase().includes("nft") ||
-          tx.description?.toLowerCase().includes("admin nft") ||
-          tx.description?.toLowerCase().includes("nft sale")),
-    );
 
     const registrationRevenue = registrationTransactions.reduce(
       (sum, tx) => sum + Math.abs(tx.amount || 0),
@@ -521,10 +527,6 @@ export default function SuperAdminDashboard() {
       0,
     );
     const upgradeRevenue = upgradeTransactions.reduce(
-      (sum, tx) => sum + Math.abs(tx.amount || 0),
-      0,
-    );
-    const adminNftRevenue = adminNftTransactions.reduce(
       (sum, tx) => sum + Math.abs(tx.amount || 0),
       0,
     );
@@ -553,6 +555,8 @@ export default function SuperAdminDashboard() {
       totalIncome,
       totalPayouts,
       netProfit: companyBalance,
+      adminNftRevenue,
+      nftRevenue,
       users,
       transactions: allTransactions,
       nfts: allNFTs,
@@ -939,7 +943,7 @@ export default function SuperAdminDashboard() {
         )}
 
         {/* Main Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {/* Company Balance */}
           <div className="bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800 rounded-xl p-6 text-white shadow-xl hover:shadow-2xl transition-all duration-300">
             <div className="flex items-center justify-between mb-6">
@@ -1070,6 +1074,72 @@ export default function SuperAdminDashboard() {
                       nft.status === "sold" || nft.status === "completed",
                   ).length || 0}
                 </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Admin NFT Profit */}
+          <div className="bg-gradient-to-br from-pink-600 via-pink-700 to-rose-800 rounded-xl p-6 text-white shadow-xl hover:shadow-2xl transition-all duration-300">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <p className="text-sm opacity-90 font-medium">
+                  Admin NFT Profit
+                </p>
+                <h3 className="text-2xl md:text-3xl font-bold mt-2">
+                  {formatCurrency(dashboardData.adminNftRevenue || 0)}
+                </h3>
+              </div>
+              <div className="p-3 bg-white/10 rounded-lg backdrop-blur-sm">
+                <FaTag className="text-2xl" />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span className="opacity-75">Revenue</span>
+                <span className="font-semibold">
+                  Admin NFT Sales
+                </span>
+              </div>
+              <div className="w-full bg-pink-500/30 rounded-full h-2">
+                <div
+                  className="h-2 bg-white rounded-full transition-all duration-1000"
+                  style={{
+                    width: `${dashboardData.totalRevenue > 0 ? Math.min((dashboardData.adminNftRevenue / dashboardData.totalRevenue) * 100, 100) : 0}%`,
+                  }}
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          {/* NFT Sale Revenue */}
+          <div className="bg-gradient-to-br from-indigo-600 via-indigo-700 to-indigo-800 rounded-xl p-6 text-white shadow-xl hover:shadow-2xl transition-all duration-300">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <p className="text-sm opacity-90 font-medium">
+                  NFT Sale Revenue
+                </p>
+                <h3 className="text-2xl md:text-3xl font-bold mt-2">
+                  {formatCurrency(dashboardData.nftRevenue || 0)}
+                </h3>
+              </div>
+              <div className="p-3 bg-white/10 rounded-lg backdrop-blur-sm">
+                <FaShoppingCart className="text-2xl" />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span className="opacity-75">Type</span>
+                <span className="font-semibold">
+                  User NFT Sales
+                </span>
+              </div>
+              <div className="w-full bg-indigo-500/30 rounded-full h-2">
+                <div
+                  className="h-2 bg-white rounded-full transition-all duration-1000"
+                  style={{
+                    width: `${dashboardData.totalRevenue > 0 ? Math.min((dashboardData.nftRevenue / dashboardData.totalRevenue) * 100, 100) : 0}%`,
+                  }}
+                ></div>
               </div>
             </div>
           </div>

@@ -9,6 +9,7 @@ import AdminSettingsDashboard from "./Dashbord/SystemSettings";
 import MLMHierarchy from "./Dashbord/MLMHierarchy";
 import ContactUs from "./Dashbord/ContactUs";
 import NFTAdmin from "./Dashbord/NFTAdmin";
+import ChangePassword from "./Dashbord/ChangePassword";
 // import APITesting from "./Dashbord/APITesting";
 
 export default function App() {
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="mlm-hierarchy" element={<MLMHierarchy />} />
           <Route path="contact-us" element={<ContactUs />} />
           <Route path="nft-admin" element={<NFTAdmin />} />
+          <Route path="change-password" element={<ChangePassword />} />
           {/* <Route path="api-testing" element={<APITesting />} /> */}
 
           <Route path="*" element={<Navigate to="/Dashbord" replace />} />
