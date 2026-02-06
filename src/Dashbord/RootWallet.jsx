@@ -554,7 +554,10 @@ export default function RootWallet() {
               $
               {(
                 transactions.summary?.totalIncome -
-                transactions.summary?.totalPayouts
+                transactions.summary?.totalPayouts -
+                adminNftTotal -
+                nftSaleTotal -
+                upgradeTotal
               )?.toLocaleString() || 0}
             </p>
             <div className="flex items-center text-sm text-gray-400">

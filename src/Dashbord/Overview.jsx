@@ -434,15 +434,10 @@ export default function SuperAdminDashboard() {
     const graphData = companyData.graph || {};
     // const companyWallet = companyData.companyWallet || "";
 
-    // Calculate Company Balance correctly: Total Income - Total Payouts
+    // Calculate Company Balance correctly: Total Income - Total Payouts - Admin NFT - NFT Sale - Upgrade
     const totalIncome = summary.totalIncome || 0; // Only API data
     const totalPayouts = summary.totalPayouts || 0; // Only API data
-    const companyBalance = totalIncome - totalPayouts;
-    const totalRevenue = totalIncome;
-    // const totalEarnings = summary.totalEarnings || 0;
-    const totalTransactions =
-      summary.transactionCount || allTransactions.length;
-
+    
     // Calculate Admin NFT Revenue
     const adminNftTransactions = allTransactions.filter(
       (tx) =>
@@ -455,6 +450,34 @@ export default function SuperAdminDashboard() {
       (sum, tx) => sum + Math.abs(tx.amount || 0),
       0,
     );
+    
+    // Calculate NFT Sale Revenue
+    const nftSaleTransactions = allTransactions.filter(
+      (tx) => tx.type === "NFT Sale",
+    );
+    const nftSaleRevenue = nftSaleTransactions.reduce(
+      (sum, tx) => sum + Math.abs(tx.amount || 0),
+      0,
+    );
+    
+    // Calculate Upgrade Revenue
+    const upgradeTransactions = allTransactions.filter(
+      (tx) =>
+        tx.type === "Upgrade" ||
+        tx.description?.toLowerCase().includes("package upgrade") ||
+        tx.description?.toLowerCase().includes("upgrade payment") ||
+        tx.description?.toLowerCase().includes("upgraded plan"),
+    );
+    const upgradeRevenue = upgradeTransactions.reduce(
+      (sum, tx) => sum + Math.abs(tx.amount || 0),
+      0,
+    );
+    
+    const companyBalance = totalIncome - totalPayouts - adminNftRevenue - nftSaleRevenue - upgradeRevenue;
+    const totalRevenue = totalIncome;
+    // const totalEarnings = summary.totalEarnings || 0;
+    const totalTransactions =
+      summary.transactionCount || allTransactions.length;
 
     // Get MLM data from graph section of company-transactions API
     const mlmTreeResult = results.mlmTree;
@@ -511,29 +534,15 @@ export default function SuperAdminDashboard() {
     const registrationTransactions = allTransactions.filter(
       (tx) => tx.type === "Registration",
     );
-    const nftTransactions = allTransactions.filter(
-      (tx) => tx.type === "NFT Sale",
-    );
-    const upgradeTransactions = allTransactions.filter(
-      (tx) => tx.type === "Upgrade",
-    );
 
     const registrationRevenue = registrationTransactions.reduce(
-      (sum, tx) => sum + Math.abs(tx.amount || 0),
-      0,
-    );
-    const nftRevenue = nftTransactions.reduce(
-      (sum, tx) => sum + Math.abs(tx.amount || 0),
-      0,
-    );
-    const upgradeRevenue = upgradeTransactions.reduce(
       (sum, tx) => sum + Math.abs(tx.amount || 0),
       0,
     );
 
     const revenueDistribution = [
       { name: "Registrations", value: registrationRevenue, color: "#3b82f6" },
-      { name: "NFT Sales", value: nftRevenue, color: "#8b5cf6" },
+      { name: "NFT Sales", value: nftSaleRevenue, color: "#8b5cf6" },
       { name: "Upgrades", value: upgradeRevenue, color: "#10b981" },
       { name: "Admin NFT", value: adminNftRevenue, color: "#f59e0b" },
     ].filter((item) => item.value > 0);
@@ -556,7 +565,8 @@ export default function SuperAdminDashboard() {
       totalPayouts,
       netProfit: companyBalance,
       adminNftRevenue,
-      nftRevenue,
+      nftRevenue: nftSaleRevenue,
+      upgradeRevenue,
       users,
       transactions: allTransactions,
       nfts: allNFTs,
