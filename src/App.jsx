@@ -11,6 +11,7 @@ import ContactUs from "./Dashbord/ContactUs";
 import NFTAdmin from "./Dashbord/NFTAdmin";
 import ChangePassword from "./Dashbord/ChangePassword";
 import NFTTreeAnalysis from "./Dashbord/NFTTreeAnalysis";
+import Withdrawal from "./Dashbord/Withdrawal";
 import ScrollToTop from "./Dashbord/ScrollToTop";
 // import APITesting from "./Dashbord/APITesting";
 
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="contact-us" element={<ContactUs />} />
           <Route path="nft-admin" element={<NFTAdmin />} />
           <Route path="nft-tree-analysis" element={<NFTTreeAnalysis />} />
+          <Route path="withdrawal" element={<Withdrawal />} />
           <Route path="change-password" element={<ChangePassword />} />
           {/* <Route path="api-testing" element={<APITesting />} /> */}
 
