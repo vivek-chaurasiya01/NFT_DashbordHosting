@@ -19,6 +19,7 @@ import {
   FaServer,
   FaEnvelope,
   FaKey,
+  FaSitemap,
 } from "react-icons/fa";
 import { FiMoon, FiSun } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -79,6 +80,7 @@ export default function MainDashBord() {
     if (path.includes("mlm-hierarchy")) return "MLM Hierarchy";
     if (path.includes("contact-us")) return "Contact Us";
     if (path.includes("nft-admin")) return "NFT Admin";
+    if (path.includes("nft-tree-analysis")) return "NFT Tree Analysis";
     if (path.includes("change-password")) return "Change Password";
     if (path.includes("api-testing")) return "API Testing";
     if (path.includes("nft-complete-system")) return "NFT Complete System";
@@ -136,10 +138,11 @@ export default function MainDashBord() {
           {[
             ["Dashboard", "/Dashbord", FaHome],
             ["Root Wallet", "/Dashbord/root-wallet", FaWallet],
-            ["MLM Hierarchy", "/Dashbord/mlm-hierarchy", FaTree],
+            ["My Hierarchy", "/Dashbord/mlm-hierarchy", FaTree],
             ["Users", "/Dashbord/user-management", FaUserFriends],
             ["Contact Us", "/Dashbord/contact-us", FaEnvelope],
             ["NFT Admin", "/Dashbord/nft-admin", FaGem],
+            ["NFT Tree", "/Dashbord/nft-tree-analysis", FaSitemap],
             // ["Change Password", "/Dashbord/change-password", FaKey],
             ["Analytics", "/Dashbord/analytics", FaChartBar],
           ].map(([label, path, Icon]) => (
@@ -233,7 +236,7 @@ export default function MainDashBord() {
         </header>
 
         {/* CONTENT */}
-        <main className="flex-1 overflow-auto p-4 md:p-6 bg-gray-50 dark:bg-gray-950">
+        <main className="flex-1 overflow-auto p-4 md:p-6 bg-gray-50 dark:bg-gray-950 dashboard-content">
           <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 min-h-full">
             <Outlet />
           </div>

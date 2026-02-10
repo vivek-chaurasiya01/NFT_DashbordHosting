@@ -11,6 +11,8 @@ import {
   FaUserCheck,
   FaUserTimes,
   FaSearch,
+  FaChevronLeft,
+  FaChevronRight,
 } from "react-icons/fa";
 const API_URL = import.meta.env.VITE_API_URL;
 export default function MLMHierarchy() {
@@ -18,6 +20,8 @@ export default function MLMHierarchy() {
   const [stats, setStats] = useState({});
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
   useEffect(() => {
     fetchHierarchyData();
@@ -294,13 +298,13 @@ export default function MLMHierarchy() {
     };
 
     Swal.fire({
-      title: `🌳 MLM Tree: ${user.name}`,
+      title: `🌳 MY Team: ${user.name}`,
       html: `
         <div style="text-align: left; font-family: monospace; background: #1a1a1a; color: #00ff00; padding: 20px; border-radius: 10px; font-size: 14px; line-height: 1.6; max-height: 500px; overflow-y: auto;">
           <div style="background: #333; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center; color: #fff;">
             <h3 style="margin: 0; color: #00ff00;">${user.name}</h3>
             <p style="margin: 5px 0; color: #ccc;">${user.email}</p>
-            <p style="margin: 5px 0; color: #ffaa00;">Code: ${user.referralCode}</p>
+            <p style="margin: 5px 0; color: #ffaa00;">UID: ${user.referralCode}</p>
             <div style="display: flex; justify-content: space-around; margin-top: 15px;">
               <div><strong style="color: #ff6b6b;">${stats?.parentCount || 0}</strong><br><small>Parents</small></div>
               <div><strong style="color: #4ecdc4;">${stats?.directChildren || 0}</strong><br><small>Direct</small></div>
@@ -325,6 +329,17 @@ export default function MLMHierarchy() {
       user.referralCode?.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
+  // Pagination calculations
+  const totalPages = Math.ceil(filteredHierarchy.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentData = filteredHierarchy.slice(startIndex, endIndex);
+
+  // Reset to page 1 when search changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, itemsPerPage]);
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen bg-slate-900">
@@ -339,10 +354,10 @@ export default function MLMHierarchy() {
         <div>
           <h1 className="text-3xl font-bold text-white flex items-center gap-3">
             <FaNetworkWired className="text-purple-400" />
-            🌳 MLM Hierarchy Dashboard
+            🌳 MY Hierarchy Dashboard
           </h1>
           <p className="text-slate-400 mt-1">
-            Complete MLM network visualization
+            Complete MY network visualization
           </p>
         </div>
 
@@ -418,7 +433,7 @@ export default function MLMHierarchy() {
           <div className="px-6 py-4 border-b border-slate-700 flex items-center gap-2">
             <FaNetworkWired className="text-purple-400" />
             <h3 className="font-bold text-xl text-white">
-              MLM Hierarchy ({filteredHierarchy.length})
+              My Hierarchy ({filteredHierarchy.length})
             </h3>
           </div>
 
@@ -445,7 +460,7 @@ export default function MLMHierarchy() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-700">
-                {filteredHierarchy.map((user) => (
+                {currentData.map((user) => (
                   <tr key={user.id} className="hover:bg-slate-700/50">
                     <td className="px-6 py-4 font-semibold text-white">
                       {user.name}
@@ -501,6 +516,73 @@ export default function MLMHierarchy() {
                 ))}
               </tbody>
             </table>
+          </div>
+
+          {/* Pagination */}
+          <div className="px-6 py-4 border-t border-slate-700 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <div className="text-slate-400 text-sm">
+                Showing {startIndex + 1} to {Math.min(endIndex, filteredHierarchy.length)} of {filteredHierarchy.length} users
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-slate-400 text-sm">Show:</span>
+                <select
+                  value={itemsPerPage}
+                  onChange={(e) => setItemsPerPage(Number(e.target.value))}
+                  className="bg-slate-700 text-white px-2 py-1 rounded-lg outline-none cursor-pointer text-sm"
+                >
+                  <option value={10}>10</option>
+                  <option value={20}>20</option>
+                  <option value={30}>30</option>
+                  <option value={50}>50</option>
+                  <option value={100}>100</option>
+                  <option value={filteredHierarchy.length}>All</option>
+                </select>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                disabled={currentPage === 1}
+                className="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+              >
+                <FaChevronLeft /> Previous
+              </button>
+              <div className="flex items-center gap-1">
+                {[...Array(totalPages)].map((_, index) => {
+                  const page = index + 1;
+                  if (
+                    page === 1 ||
+                    page === totalPages ||
+                    (page >= currentPage - 1 && page <= currentPage + 1)
+                  ) {
+                    return (
+                      <button
+                        key={page}
+                        onClick={() => setCurrentPage(page)}
+                        className={`px-3 py-2 rounded-lg ${
+                          currentPage === page
+                            ? "bg-purple-600 text-white"
+                            : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+                        }`}
+                      >
+                        {page}
+                      </button>
+                    );
+                  } else if (page === currentPage - 2 || page === currentPage + 2) {
+                    return <span key={page} className="text-slate-400">...</span>;
+                  }
+                  return null;
+                })}
+              </div>
+              <button
+                onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                disabled={currentPage === totalPages}
+                className="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+              >
+                Next <FaChevronRight />
+              </button>
+            </div>
           </div>
         </div>
       </div>

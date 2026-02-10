@@ -490,7 +490,7 @@ export default function MLMAnalyticsDashboard() {
                 <FaChartLine className="text-3xl text-white" />
               </div>
               <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                MLM Business Intelligence Dashboard
+                MY Business Intelligence Dashboard
               </span>
             </h1>
             <p className="text-gray-600 dark:text-gray-400 mt-3 text-lg max-w-3xl">

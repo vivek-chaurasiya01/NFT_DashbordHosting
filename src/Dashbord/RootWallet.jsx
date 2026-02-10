@@ -10,6 +10,7 @@ import {
   FaFilter,
   FaSearch,
   FaChevronRight,
+  FaChevronLeft,
   FaNetworkWired,
   FaTag,
   FaMoneyBillWave,
@@ -92,6 +93,10 @@ export default function RootWallet() {
   const [sortOrder, setSortOrder] = useState("desc");
   const [showUserModal, setShowUserModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [userCurrentPage, setUserCurrentPage] = useState(1);
+  const [userItemsPerPage, setUserItemsPerPage] = useState(10);
 
   useEffect(() => {
     fetchWalletData();
@@ -384,6 +389,23 @@ export default function RootWallet() {
     activeCard,
     sortOrder,
   ]);
+
+  // Pagination calculations
+  const totalPages = Math.ceil(filteredTransactions.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentTransactions = filteredTransactions.slice(startIndex, endIndex);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, filterType, activeCard]);
+
+  // User pagination calculations
+  const userTotalPages = Math.ceil(users.length / userItemsPerPage);
+  const userStartIndex = (userCurrentPage - 1) * userItemsPerPage;
+  const userEndIndex = userStartIndex + userItemsPerPage;
+  const currentUsers = users.slice(userStartIndex, userEndIndex);
 
   const transactionTypes = useMemo(() => {
     const types = new Set();
@@ -990,7 +1012,7 @@ export default function RootWallet() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-800">
-                      {filteredTransactions.map((tx) => (
+                      {currentTransactions.map((tx) => (
                         <tr
                           key={tx.id}
                           className="hover:bg-gray-900/30 transition-colors"
@@ -1103,6 +1125,77 @@ export default function RootWallet() {
                     </div>
                   )}
                 </div>
+
+                {/* Pagination */}
+                {filteredTransactions.length > 0 && (
+                  <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 px-4">
+                    <div className="flex items-center gap-4">
+                      <div className="text-gray-400 text-sm">
+                        Showing {startIndex + 1} to {Math.min(endIndex, filteredTransactions.length)} of {filteredTransactions.length} transactions
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-gray-400 text-sm">Show:</span>
+                        <select
+                          value={itemsPerPage}
+                          onChange={(e) => {
+                            setItemsPerPage(Number(e.target.value));
+                            setCurrentPage(1);
+                          }}
+                          className="bg-gray-900/50 border border-gray-700 text-white px-3 py-1 rounded-lg outline-none cursor-pointer text-sm"
+                        >
+                          <option value={10}>10</option>
+                          <option value={20}>20</option>
+                          <option value={30}>30</option>
+                          <option value={50}>50</option>
+                          <option value={100}>100</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                        disabled={currentPage === 1}
+                        className="px-4 py-2 bg-gray-900/50 border border-gray-700 text-white rounded-lg hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 transition-colors"
+                      >
+                        <FaChevronLeft /> Previous
+                      </button>
+                      <div className="flex items-center gap-1">
+                        {[...Array(totalPages)].map((_, index) => {
+                          const page = index + 1;
+                          if (
+                            page === 1 ||
+                            page === totalPages ||
+                            (page >= currentPage - 1 && page <= currentPage + 1)
+                          ) {
+                            return (
+                              <button
+                                key={page}
+                                onClick={() => setCurrentPage(page)}
+                                className={`px-3 py-2 rounded-lg transition-colors ${
+                                  currentPage === page
+                                    ? "bg-blue-600 text-white"
+                                    : "bg-gray-900/50 border border-gray-700 text-gray-300 hover:bg-gray-800"
+                                }`}
+                              >
+                                {page}
+                              </button>
+                            );
+                          } else if (page === currentPage - 2 || page === currentPage + 2) {
+                            return <span key={page} className="text-gray-400 px-2">...</span>;
+                          }
+                          return null;
+                        })}
+                      </div>
+                      <button
+                        onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                        disabled={currentPage === totalPages}
+                        className="px-4 py-2 bg-gray-900/50 border border-gray-700 text-white rounded-lg hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 transition-colors"
+                      >
+                        Next <FaChevronRight />
+                      </button>
+                    </div>
+                  </div>
+                )}
               </>
             ) : viewMode === "users" ? (
               /* Users View */
@@ -1136,7 +1229,7 @@ export default function RootWallet() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-800">
-                      {users.map((user) => (
+                      {currentUsers.map((user) => (
                         <tr
                           key={user._id}
                           className="hover:bg-gray-900/30 transition-colors cursor-pointer"
@@ -1222,6 +1315,77 @@ export default function RootWallet() {
                     </div>
                   )}
                 </div>
+
+                {/* User Pagination */}
+                {users.length > 0 && (
+                  <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 px-4">
+                    <div className="flex items-center gap-4">
+                      <div className="text-gray-400 text-sm">
+                        Showing {userStartIndex + 1} to {Math.min(userEndIndex, users.length)} of {users.length} users
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-gray-400 text-sm">Show:</span>
+                        <select
+                          value={userItemsPerPage}
+                          onChange={(e) => {
+                            setUserItemsPerPage(Number(e.target.value));
+                            setUserCurrentPage(1);
+                          }}
+                          className="bg-gray-900/50 border border-gray-700 text-white px-3 py-1 rounded-lg outline-none cursor-pointer text-sm"
+                        >
+                          <option value={10}>10</option>
+                          <option value={20}>20</option>
+                          <option value={30}>30</option>
+                          <option value={50}>50</option>
+                          <option value={100}>100</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => setUserCurrentPage(prev => Math.max(1, prev - 1))}
+                        disabled={userCurrentPage === 1}
+                        className="px-4 py-2 bg-gray-900/50 border border-gray-700 text-white rounded-lg hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 transition-colors"
+                      >
+                        <FaChevronLeft /> Previous
+                      </button>
+                      <div className="flex items-center gap-1">
+                        {[...Array(userTotalPages)].map((_, index) => {
+                          const page = index + 1;
+                          if (
+                            page === 1 ||
+                            page === userTotalPages ||
+                            (page >= userCurrentPage - 1 && page <= userCurrentPage + 1)
+                          ) {
+                            return (
+                              <button
+                                key={page}
+                                onClick={() => setUserCurrentPage(page)}
+                                className={`px-3 py-2 rounded-lg transition-colors ${
+                                  userCurrentPage === page
+                                    ? "bg-blue-600 text-white"
+                                    : "bg-gray-900/50 border border-gray-700 text-gray-300 hover:bg-gray-800"
+                                }`}
+                              >
+                                {page}
+                              </button>
+                            );
+                          } else if (page === userCurrentPage - 2 || page === userCurrentPage + 2) {
+                            return <span key={page} className="text-gray-400 px-2">...</span>;
+                          }
+                          return null;
+                        })}
+                      </div>
+                      <button
+                        onClick={() => setUserCurrentPage(prev => Math.min(userTotalPages, prev + 1))}
+                        disabled={userCurrentPage === userTotalPages}
+                        className="px-4 py-2 bg-gray-900/50 border border-gray-700 text-white rounded-lg hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 transition-colors"
+                      >
+                        Next <FaChevronRight />
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             ) : (
               /* Graph View */

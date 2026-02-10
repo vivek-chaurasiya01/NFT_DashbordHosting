@@ -43,6 +43,8 @@ import {
   FaRegChartBar,
   FaTimes,
   FaTag,
+  FaChevronLeft,
+  FaChevronRight,
 } from "react-icons/fa";
 import {
   LineChart,
@@ -114,6 +116,8 @@ export default function SuperAdminDashboard() {
     packages: true,
   });
   const [revenueTrendRange, setRevenueTrendRange] = useState("month");
+  const [transactionCurrentPage, setTransactionCurrentPage] = useState(1);
+  const [transactionItemsPerPage, setTransactionItemsPerPage] = useState(10);
 
   const API_ENDPOINTS = [
     {
@@ -175,6 +179,12 @@ export default function SuperAdminDashboard() {
       setFilteredUsers(filtered);
     }
   }, [searchTerm, dashboardData.users]);
+
+  // Transaction pagination calculations
+  const transactionTotalPages = Math.ceil(dashboardData.transactions.length / transactionItemsPerPage);
+  const transactionStartIndex = (transactionCurrentPage - 1) * transactionItemsPerPage;
+  const transactionEndIndex = transactionStartIndex + transactionItemsPerPage;
+  const currentTransactions = dashboardData.transactions.slice(transactionStartIndex, transactionEndIndex);
 
 
 
@@ -906,7 +916,7 @@ export default function SuperAdminDashboard() {
             </div>
             <div>
               <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
-                MLM Super Admin Dashboard
+                MY Super Admin Dashboard
               </h1>
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 Real-time analytics • {Object.keys(apiStatus).length} APIs
@@ -1631,8 +1641,8 @@ export default function SuperAdminDashboard() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
-                    {dashboardData.transactions.length > 0 ? (
-                      dashboardData.transactions.map((tx, index) => (
+                    {currentTransactions.length > 0 ? (
+                      currentTransactions.map((tx, index) => (
                         <tr
                           key={tx.id || index}
                           className="hover:bg-gray-50 dark:hover:bg-gray-800/50"
@@ -1732,6 +1742,77 @@ export default function SuperAdminDashboard() {
                   </tbody>
                 </table>
               </div>
+
+              {/* Transaction Pagination */}
+              {dashboardData.transactions.length > 0 && (
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-4">
+                  <div className="flex items-center gap-4">
+                    <div className="text-gray-600 dark:text-gray-400 text-sm">
+                      Showing {transactionStartIndex + 1} to {Math.min(transactionEndIndex, dashboardData.transactions.length)} of {dashboardData.transactions.length} transactions
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-gray-600 dark:text-gray-400 text-sm">Show:</span>
+                      <select
+                        value={transactionItemsPerPage}
+                        onChange={(e) => {
+                          setTransactionItemsPerPage(Number(e.target.value));
+                          setTransactionCurrentPage(1);
+                        }}
+                        className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white px-3 py-1 rounded-lg outline-none cursor-pointer text-sm"
+                      >
+                        <option value={10}>10</option>
+                        <option value={20}>20</option>
+                        <option value={30}>30</option>
+                        <option value={50}>50</option>
+                        <option value={100}>100</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => setTransactionCurrentPage(prev => Math.max(1, prev - 1))}
+                      disabled={transactionCurrentPage === 1}
+                      className="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 transition-colors"
+                    >
+                      <FaChevronLeft /> Previous
+                    </button>
+                    <div className="flex items-center gap-1">
+                      {[...Array(transactionTotalPages)].map((_, index) => {
+                        const page = index + 1;
+                        if (
+                          page === 1 ||
+                          page === transactionTotalPages ||
+                          (page >= transactionCurrentPage - 1 && page <= transactionCurrentPage + 1)
+                        ) {
+                          return (
+                            <button
+                              key={page}
+                              onClick={() => setTransactionCurrentPage(page)}
+                              className={`px-3 py-2 rounded-lg transition-colors ${
+                                transactionCurrentPage === page
+                                  ? "bg-blue-600 text-white"
+                                  : "bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700"
+                              }`}
+                            >
+                              {page}
+                            </button>
+                          );
+                        } else if (page === transactionCurrentPage - 2 || page === transactionCurrentPage + 2) {
+                          return <span key={page} className="text-gray-400 dark:text-gray-500 px-2">...</span>;
+                        }
+                        return null;
+                      })}
+                    </div>
+                    <button
+                      onClick={() => setTransactionCurrentPage(prev => Math.min(transactionTotalPages, prev + 1))}
+                      disabled={transactionCurrentPage === transactionTotalPages}
+                      className="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 transition-colors"
+                    >
+                      Next <FaChevronRight />
+                    </button>
+                  </div>
+                </div>
+              )}
 
               {/* Transaction Summary */}
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
