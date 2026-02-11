@@ -146,6 +146,7 @@ export default function MainDashBord() {
             ["Contact Us", "/Dashbord/contact-us", FaEnvelope],
             ["NFT Admin", "/Dashbord/nft-admin", FaGem],
             ["NFT Tree", "/Dashbord/nft-tree-analysis", FaSitemap],
+            ["Change Password", "/Dashbord/change-password", FaKey],
             ["Analytics", "/Dashbord/analytics", FaChartBar],
           ].map(([label, path, Icon]) => (
             <NavLink

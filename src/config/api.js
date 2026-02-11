@@ -15,6 +15,7 @@ export const API_ENDPOINTS = {
   // 🏢 SuperAdmin APIs
   ADMIN_REGISTER: "/SuperAdmin/register",
   ADMIN_LOGIN: "/auth/login",
+  ADMIN_CHANGE_PASSWORD: "/SuperAdmin/change-password",
   COMPANY_BALANCE: "/admin/company-balance",
   COMPANY_TRANSACTIONS: "/admin/company-transactions",
   DEMO_ADD_BALANCE: "/admin/demo-add-balance",
