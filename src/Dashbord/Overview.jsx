@@ -100,6 +100,12 @@ export default function SuperAdminDashboard() {
     topPerformers: [],
     recentUsers: [],
     pendingWithdrawals: [],
+    tradingStats: {
+      totalLimit: 0,
+      totalSold: 0,
+      remaining: 0,
+      percentageUsed: "0.00%"
+    },
   });
 
   const [loading, setLoading] = useState(true);
@@ -152,6 +158,13 @@ export default function SuperAdminDashboard() {
       name: "All NFTs Admin",
       endpoint: "/api/admin/nfts",
       key: "adminNfts",
+      method: "GET",
+      requiresAuth: false,
+    },
+    {
+      name: "Trading Stats",
+      endpoint: "/api/admin/trading-stats",
+      key: "tradingStats",
       method: "GET",
       requiresAuth: false,
     },
@@ -461,6 +474,27 @@ export default function SuperAdminDashboard() {
       0,
     );
     
+    // Calculate Company Base Profit (20%) and Missed Bonuses from company_earning type
+    const companyBaseProfitTx = allTransactions.filter(
+      (tx) =>
+        tx.type === "company_earning" &&
+        tx.description?.toLowerCase().includes("base profit"),
+    );
+    const companyBaseProfit = companyBaseProfitTx.reduce(
+      (sum, tx) => sum + Math.abs(tx.amount || 0),
+      0,
+    );
+    
+    const missedBonusesTx = allTransactions.filter(
+      (tx) =>
+        tx.type === "company_earning" &&
+        tx.description?.toLowerCase().includes("missed"),
+    );
+    const missedBonuses = missedBonusesTx.reduce(
+      (sum, tx) => sum + Math.abs(tx.amount || 0),
+      0,
+    );
+    
     // Calculate NFT Sale Revenue
     const nftSaleTransactions = allTransactions.filter(
       (tx) => tx.type === "NFT Sale",
@@ -507,6 +541,10 @@ export default function SuperAdminDashboard() {
     // Get admin dashboard data
     // const adminResult = results.adminDashboard;
     // const adminData = adminResult?.data || {};
+
+    // Get Trading Stats data
+    const tradingStatsResult = results.tradingStats;
+    const tradingStatsData = tradingStatsResult?.data || {};
 
     // Get NFT data
     const nftResult = results.adminNfts;
@@ -575,8 +613,13 @@ export default function SuperAdminDashboard() {
       totalPayouts,
       netProfit: companyBalance,
       adminNftRevenue,
+      adminNftTransactionsCount: adminNftTransactions.length,
       nftRevenue: nftSaleRevenue,
       upgradeRevenue,
+      companyBaseProfit,
+      companyBaseProfitCount: companyBaseProfitTx.length,
+      missedBonuses,
+      missedBonusesCount: missedBonusesTx.length,
       users,
       transactions: allTransactions,
       nfts: allNFTs,
@@ -610,6 +653,12 @@ export default function SuperAdminDashboard() {
       })),
       recentUsers: users.slice(0, 10),
       pendingWithdrawals: [],
+      tradingStats: {
+        totalLimit: tradingStatsData.totalLimit || 0,
+        totalSold: tradingStatsData.totalSold || 0,
+        remaining: tradingStatsData.remaining || 0,
+        percentageUsed: tradingStatsData.percentageUsed || "0.00%"
+      },
     };
   };
 
@@ -1115,31 +1164,31 @@ export default function SuperAdminDashboard() {
             </div>
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="opacity-75">Revenue</span>
+                <span className="opacity-75">NFTs Sold</span>
                 <span className="font-semibold">
-                  Admin NFT Sales
+                  {dashboardData.adminNftTransactionsCount || 0} / 500
                 </span>
               </div>
               <div className="w-full bg-pink-500/30 rounded-full h-2">
                 <div
                   className="h-2 bg-white rounded-full transition-all duration-1000"
                   style={{
-                    width: `${dashboardData.totalRevenue > 0 ? Math.min((dashboardData.adminNftRevenue / dashboardData.totalRevenue) * 100, 100) : 0}%`,
+                    width: `${Math.min(((dashboardData.adminNftTransactionsCount || 0) / 500) * 100, 100)}%`,
                   }}
                 ></div>
               </div>
             </div>
           </div>
 
-          {/* NFT Sale Revenue */}
-          <div className="bg-gradient-to-br from-indigo-600 via-indigo-700 to-indigo-800 rounded-xl p-6 text-white shadow-xl hover:shadow-2xl transition-all duration-300">
+          {/* Company Base Profit (20%) */}
+          <div className="bg-gradient-to-br from-teal-600 via-teal-700 to-cyan-800 rounded-xl p-6 text-white shadow-xl hover:shadow-2xl transition-all duration-300">
             <div className="flex items-center justify-between mb-6">
               <div>
                 <p className="text-sm opacity-90 font-medium">
-                  NFT Sale Revenue
+                  Base Profit (20%)
                 </p>
                 <h3 className="text-2xl md:text-3xl font-bold mt-2">
-                  {formatCurrency(dashboardData.nftRevenue || 0)}
+                  {formatCurrency(dashboardData.companyBaseProfit || 0)}
                 </h3>
               </div>
               <div className="p-3 bg-white/10 rounded-lg backdrop-blur-sm">
@@ -1148,19 +1197,88 @@ export default function SuperAdminDashboard() {
             </div>
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="opacity-75">Type</span>
+                <span className="opacity-75">Company Share</span>
                 <span className="font-semibold">
-                  User NFT Sales
+                  {dashboardData.companyBaseProfitCount || 0} Txns
+                </span>
+              </div>
+              <div className="w-full bg-teal-500/30 rounded-full h-2">
+                <div
+                  className="h-2 bg-white rounded-full transition-all duration-1000"
+                  style={{
+                    width: `${Math.min(((dashboardData.companyBaseProfitCount || 0) / 100) * 100, 100)}%`,
+                  }}
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Missed Parent Bonuses */}
+          <div className="bg-gradient-to-br from-orange-600 via-orange-700 to-amber-800 rounded-xl p-6 text-white shadow-xl hover:shadow-2xl transition-all duration-300">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <p className="text-sm opacity-90 font-medium">
+                  Missed Bonuses
+                </p>
+                <h3 className="text-2xl md:text-3xl font-bold mt-2">
+                  {formatCurrency(dashboardData.missedBonuses || 0)}
+                </h3>
+              </div>
+              <div className="p-3 bg-white/10 rounded-lg backdrop-blur-sm">
+                <FaExclamationTriangle className="text-2xl" />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span className="opacity-75">Unpaid Parents</span>
+                <span className="font-semibold">
+                  {dashboardData.missedBonusesCount || 0} Cases
+                </span>
+              </div>
+              <div className="w-full bg-orange-500/30 rounded-full h-2">
+                <div
+                  className="h-2 bg-white rounded-full transition-all duration-1000"
+                  style={{
+                    width: `${Math.min((dashboardData.missedBonusesCount || 0) * 10, 100)}%`,
+                  }}
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Trading Stats */}
+          <div className="bg-gradient-to-br from-indigo-600 via-indigo-700 to-blue-800 rounded-xl p-6 text-white shadow-xl hover:shadow-2xl transition-all duration-300">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <p className="text-sm opacity-90 font-medium">
+                  Trading Limit
+                </p>
+                <h3 className="text-2xl md:text-3xl font-bold mt-2">
+                  {formatCurrency(dashboardData.tradingStats.remaining || 0)}
+                </h3>
+              </div>
+              <div className="p-3 bg-white/10 rounded-lg backdrop-blur-sm">
+                <FaChartLine className="text-2xl" />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span className="opacity-75">Sold / Total</span>
+                <span className="font-semibold">
+                  {dashboardData.tradingStats.totalSold || 0} / {formatNumber(dashboardData.tradingStats.totalLimit || 0)}
                 </span>
               </div>
               <div className="w-full bg-indigo-500/30 rounded-full h-2">
                 <div
                   className="h-2 bg-white rounded-full transition-all duration-1000"
                   style={{
-                    width: `${dashboardData.totalRevenue > 0 ? Math.min((dashboardData.nftRevenue / dashboardData.totalRevenue) * 100, 100) : 0}%`,
+                    width: `${parseFloat(dashboardData.tradingStats.percentageUsed) || 0}%`,
                   }}
                 ></div>
               </div>
+              <p className="text-xs opacity-75 text-right">
+                {dashboardData.tradingStats.percentageUsed || "0.00%"} Used
+              </p>
             </div>
           </div>
         </div>
