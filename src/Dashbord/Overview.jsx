@@ -1185,7 +1185,7 @@ export default function SuperAdminDashboard() {
             <div className="flex items-center justify-between mb-6">
               <div>
                 <p className="text-sm opacity-90 font-medium">
-                  Base Profit (20%)
+                  2nd Phase Proift (4$)
                 </p>
                 <h3 className="text-2xl md:text-3xl font-bold mt-2">
                   {formatCurrency(dashboardData.companyBaseProfit || 0)}
@@ -1218,7 +1218,7 @@ export default function SuperAdminDashboard() {
             <div className="flex items-center justify-between mb-6">
               <div>
                 <p className="text-sm opacity-90 font-medium">
-                  Missed Bonuses
+                 2nd phase Missed Bonuses
                 </p>
                 <h3 className="text-2xl md:text-3xl font-bold mt-2">
                   {formatCurrency(dashboardData.missedBonuses || 0)}
