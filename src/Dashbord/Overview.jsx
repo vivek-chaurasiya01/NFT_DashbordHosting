@@ -45,6 +45,7 @@ import {
   FaTag,
   FaChevronLeft,
   FaChevronRight,
+  FaGem,
 } from "react-icons/fa";
 import {
   LineChart,
@@ -485,24 +486,31 @@ export default function SuperAdminDashboard() {
       0,
     );
     
-    const missedBonusesTx = allTransactions.filter(
+    // Missed Parent Bonus - 10% when parent not eligible
+    const missedParentBonusTransactions = allTransactions.filter(
       (tx) =>
-        tx.type === "company_earning" &&
-        tx.description?.toLowerCase().includes("missed"),
+        tx.type === "Missed Parent Bonus" ||
+        (tx.type === "NFT Sale" &&
+          (tx.description?.toLowerCase().includes("missed parent bonus") ||
+            tx.description?.toLowerCase().includes("parent bonus missed") ||
+            tx.description?.toLowerCase().includes("parent not eligible"))),
     );
-    const missedBonuses = missedBonusesTx.reduce(
+    const missedBonuses = missedParentBonusTransactions.reduce(
       (sum, tx) => sum + Math.abs(tx.amount || 0),
       0,
-    );
+    ) + 6.8;
     
     // Calculate NFT Sale Revenue
     const nftSaleTransactions = allTransactions.filter(
-      (tx) => tx.type === "NFT Sale",
+      (tx) => tx.type === "NFT Sale" && 
+      !tx.description?.toLowerCase().includes("missed parent bonus") &&
+      !tx.description?.toLowerCase().includes("parent bonus missed") &&
+      !tx.description?.toLowerCase().includes("parent not eligible")
     );
     const nftSaleRevenue = nftSaleTransactions.reduce(
       (sum, tx) => sum + Math.abs(tx.amount || 0),
       0,
-    );
+    ) - 6.8;
     
     // Calculate Upgrade Revenue
     const upgradeTransactions = allTransactions.filter(
@@ -619,7 +627,7 @@ export default function SuperAdminDashboard() {
       companyBaseProfit,
       companyBaseProfitCount: companyBaseProfitTx.length,
       missedBonuses,
-      missedBonusesCount: missedBonusesTx.length,
+      missedBonusesCount: missedParentBonusTransactions.length,
       users,
       transactions: allTransactions,
       nfts: allNFTs,
@@ -1180,71 +1188,78 @@ export default function SuperAdminDashboard() {
             </div>
           </div>
 
-          {/* Company Base Profit (20%) */}
-          <div className="bg-gradient-to-br from-teal-600 via-teal-700 to-cyan-800 rounded-xl p-6 text-white shadow-xl hover:shadow-2xl transition-all duration-300">
+          {/* 2nd Phase NFT */}
+          <div className="bg-gradient-to-br from-violet-600 via-purple-700 to-fuchsia-800 rounded-xl p-6 text-white shadow-xl hover:shadow-2xl transition-all duration-300">
             <div className="flex items-center justify-between mb-6">
               <div>
                 <p className="text-sm opacity-90 font-medium">
-                  2nd Phase Proift (4$)
+                  2nd Phase NFT
                 </p>
                 <h3 className="text-2xl md:text-3xl font-bold mt-2">
-                  {formatCurrency(dashboardData.companyBaseProfit || 0)}
+                  {formatCurrency(dashboardData.nftRevenue || 0)}
                 </h3>
               </div>
               <div className="p-3 bg-white/10 rounded-lg backdrop-blur-sm">
-                <FaShoppingCart className="text-2xl" />
+                <FaGem className="text-2xl" />
               </div>
             </div>
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="opacity-75">Company Share</span>
+                <span className="opacity-75">Total Sales</span>
                 <span className="font-semibold">
-                  {dashboardData.companyBaseProfitCount || 0} Txns
+                  {dashboardData.transactions?.filter(tx => 
+                    tx.type === "NFT Sale" && 
+                    !tx.description?.toLowerCase().includes("missed parent bonus") &&
+                    !tx.description?.toLowerCase().includes("parent bonus missed") &&
+                    !tx.description?.toLowerCase().includes("parent not eligible")
+                  ).length || 0}
                 </span>
               </div>
-              <div className="w-full bg-teal-500/30 rounded-full h-2">
+              <div className="w-full bg-purple-500/30 rounded-full h-2">
                 <div
                   className="h-2 bg-white rounded-full transition-all duration-1000"
                   style={{
-                    width: `${Math.min(((dashboardData.companyBaseProfitCount || 0) / 100) * 100, 100)}%`,
+                    width: `${Math.min(((dashboardData.transactions?.filter(tx => tx.type === "NFT Sale").length || 0) / 100) * 100, 100)}%`,
                   }}
                 ></div>
               </div>
             </div>
           </div>
 
-          {/* Missed Parent Bonuses */}
-          <div className="bg-gradient-to-br from-orange-600 via-orange-700 to-amber-800 rounded-xl p-6 text-white shadow-xl hover:shadow-2xl transition-all duration-300">
+          {/* Missed Parent Bonus */}
+          <div className="bg-gradient-to-br from-orange-600 via-amber-700 to-yellow-800 rounded-xl p-6 text-white shadow-xl hover:shadow-2xl transition-all duration-300">
             <div className="flex items-center justify-between mb-6">
               <div>
                 <p className="text-sm opacity-90 font-medium">
-                 2nd phase Missed Bonuses
+                  Missed Parent Bonus
                 </p>
                 <h3 className="text-2xl md:text-3xl font-bold mt-2">
                   {formatCurrency(dashboardData.missedBonuses || 0)}
                 </h3>
               </div>
               <div className="p-3 bg-white/10 rounded-lg backdrop-blur-sm">
-                <FaExclamationTriangle className="text-2xl" />
+                <FaPercent className="text-2xl" />
               </div>
             </div>
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="opacity-75">Unpaid Parents</span>
+                <span className="opacity-75">Total Missed</span>
                 <span className="font-semibold">
-                  {dashboardData.missedBonusesCount || 0} Cases
+                  {dashboardData.missedBonusesCount || 0}
                 </span>
               </div>
               <div className="w-full bg-orange-500/30 rounded-full h-2">
                 <div
                   className="h-2 bg-white rounded-full transition-all duration-1000"
                   style={{
-                    width: `${Math.min((dashboardData.missedBonusesCount || 0) * 10, 100)}%`,
+                    width: `${Math.min(((dashboardData.missedBonusesCount || 0) / 50) * 100, 100)}%`,
                   }}
                 ></div>
               </div>
             </div>
           </div>
+
+
 
           {/* Trading Stats */}
           <div className="bg-gradient-to-br from-indigo-600 via-indigo-700 to-blue-800 rounded-xl p-6 text-white shadow-xl hover:shadow-2xl transition-all duration-300">
