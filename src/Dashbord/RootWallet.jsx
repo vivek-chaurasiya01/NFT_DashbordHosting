@@ -321,10 +321,11 @@ export default function RootWallet() {
       } else if (activeCard === "Missed Parent Bonus") {
         filtered = filtered.filter(
           (tx) =>
-            tx.type === "Missed Parent Bonus" ||
-            (tx.type === "NFT Sale" &&
-              (tx.description?.toLowerCase().includes("missed parent bonus") ||
-                tx.description?.toLowerCase().includes("parent bonus missed"))),
+            tx.type === "NFT Sale" &&
+            (tx.description?.includes("Company 40%") ||
+              tx.description?.includes("Company 30%") ||
+              tx.description?.toLowerCase().includes("missed") ||
+              tx.description?.toLowerCase().includes("parent not eligible")),
         );
       } else if (activeCard === "Admin NFT") {
         // Show admin NFT transactions (from Other type with NFT descriptions)
@@ -363,10 +364,11 @@ export default function RootWallet() {
       if (filterType === "Missed Parent Bonus") {
         filtered = filtered.filter(
           (tx) =>
-            tx.type === "Missed Parent Bonus" ||
-            (tx.type === "NFT Sale" &&
-              (tx.description?.toLowerCase().includes("missed parent bonus") ||
-                tx.description?.toLowerCase().includes("parent bonus missed"))),
+            tx.type === "NFT Sale" &&
+            (tx.description?.includes("Company 40%") ||
+              tx.description?.includes("Company 30%") ||
+              tx.description?.toLowerCase().includes("missed") ||
+              tx.description?.toLowerCase().includes("parent not eligible")),
         );
       } else if (filterType === "Admin NFT") {
         // Show admin NFT transactions
@@ -445,20 +447,17 @@ export default function RootWallet() {
   const missedParentBonusTransactions = useMemo(() => {
     return transactions.transactions.filter(
       (tx) =>
-        tx.type === "Missed Parent Bonus" ||
-        (tx.type === "NFT Sale" &&
-          (tx.description?.toLowerCase().includes("missed parent bonus") ||
-            tx.description?.toLowerCase().includes("parent bonus missed") ||
-            tx.description?.toLowerCase().includes("parent not eligible"))),
+        tx.type === "NFT Sale" &&
+        (tx.description?.includes("Company 40%") ||
+          tx.description?.includes("Company 30%") ||
+          tx.description?.toLowerCase().includes("missed") ||
+          tx.description?.toLowerCase().includes("parent not eligible")),
     );
   }, [transactions.transactions]);
 
   const nftSaleTransactions = useMemo(() => {
     const nftTx = transactions.transactions.filter(
-      (tx) => tx.type === "NFT Sale" && 
-      !tx.description?.toLowerCase().includes("missed parent bonus") &&
-      !tx.description?.toLowerCase().includes("parent bonus missed") &&
-      !tx.description?.toLowerCase().includes("parent not eligible")
+      (tx) => tx.type === "NFT Sale",
     );
     console.log("NFT Sale transactions:", nftTx.length, nftTx);
     return nftTx;
@@ -517,11 +516,11 @@ export default function RootWallet() {
   const missedParentBonusTotal = missedParentBonusTransactions.reduce(
     (sum, tx) => sum + Math.abs(tx.amount || 0),
     0,
-  ) + 6.8;
+  );
   const nftSaleTotal = nftSaleTransactions.reduce(
     (sum, tx) => sum + Math.abs(tx.amount || 0),
     0,
-  ) - 6.8;
+  );
   const adminNftTotal = adminNftTransactions.reduce(
     (sum, tx) => sum + Math.abs(tx.amount || 0),
     0,
@@ -678,7 +677,7 @@ export default function RootWallet() {
               </span>
             </div>
             <h3 className="text-gray-400 text-sm font-medium mb-2">
-              Admin NFT
+              2nd Phase NFT Profit
             </h3>
             <p className="text-3xl font-bold text-white mb-2">
               ${adminNftTotal?.toLocaleString() || 0}
@@ -853,9 +852,7 @@ export default function RootWallet() {
                   {card.count} TX
                 </span>
               </div>
-              <h3 className="text-gray-300 font-medium mb-2">
-                {card.type === "NFT Sale" ? "2nd Phase NFT" : card.type}
-              </h3>
+              <h3 className="text-gray-300 font-medium mb-2">{card.type}</h3>
               <p className="text-2xl font-bold text-white mb-2">
                 ${card.amount.toLocaleString()}
               </p>
