@@ -517,6 +517,24 @@ export default function SuperAdminDashboard() {
       0,
     );
     
+    // Calculate NFT Sale ($4) Revenue
+    const nftSale4DollarTx = allTransactions.filter(
+      (tx) => tx.type === "NFT Sale" && tx.companyShare === 4,
+    );
+    const nftSale4Dollar = nftSale4DollarTx.reduce(
+      (sum, tx) => sum + Math.abs(tx.amount || 0),
+      0,
+    );
+    
+    // Calculate Missed Parent Bonus (NFT Sale < $4)
+    const missedParentBonusTx = allTransactions.filter(
+      (tx) => tx.type === "NFT Sale" && tx.companyShare < 4,
+    );
+    const missedParentBonus = missedParentBonusTx.reduce(
+      (sum, tx) => sum + Math.abs(tx.amount || 0),
+      0,
+    );
+    
     const companyBalance = totalIncome - totalPayouts - adminNftRevenue - nftSaleRevenue - upgradeRevenue;
     const totalRevenue = totalIncome;
     // const totalEarnings = summary.totalEarnings || 0;
@@ -616,6 +634,10 @@ export default function SuperAdminDashboard() {
       adminNftTransactionsCount: adminNftTransactions.length,
       nftRevenue: nftSaleRevenue,
       upgradeRevenue,
+      nftSale4Dollar,
+      nftSale4DollarCount: nftSale4DollarTx.length,
+      missedParentBonus,
+      missedParentBonusCount: missedParentBonusTx.length,
       companyBaseProfit,
       companyBaseProfitCount: companyBaseProfitTx.length,
       missedBonuses,
@@ -1180,15 +1202,15 @@ export default function SuperAdminDashboard() {
             </div>
           </div>
 
-          {/* Company Base Profit (20%) */}
+          {/* NFT Sale (4$) */}
           <div className="bg-gradient-to-br from-teal-600 via-teal-700 to-cyan-800 rounded-xl p-6 text-white shadow-xl hover:shadow-2xl transition-all duration-300">
             <div className="flex items-center justify-between mb-6">
               <div>
                 <p className="text-sm opacity-90 font-medium">
-                  2nd Phase Proift (4$)
+                  NFT Sale ($4)
                 </p>
                 <h3 className="text-2xl md:text-3xl font-bold mt-2">
-                  {formatCurrency(dashboardData.companyBaseProfit || 0)}
+                  {formatCurrency(dashboardData.nftSale4Dollar || 0)}
                 </h3>
               </div>
               <div className="p-3 bg-white/10 rounded-lg backdrop-blur-sm">
@@ -1197,31 +1219,31 @@ export default function SuperAdminDashboard() {
             </div>
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="opacity-75">Company Share</span>
+                <span className="opacity-75">$4 NFT Sales</span>
                 <span className="font-semibold">
-                  {dashboardData.companyBaseProfitCount || 0} Txns
+                  {dashboardData.nftSale4DollarCount || 0} Txns
                 </span>
               </div>
               <div className="w-full bg-teal-500/30 rounded-full h-2">
                 <div
                   className="h-2 bg-white rounded-full transition-all duration-1000"
                   style={{
-                    width: `${Math.min(((dashboardData.companyBaseProfitCount || 0) / 100) * 100, 100)}%`,
+                    width: `${Math.min(((dashboardData.nftSale4DollarCount || 0) / 100) * 100, 100)}%`,
                   }}
                 ></div>
               </div>
             </div>
           </div>
 
-          {/* Missed Parent Bonuses */}
+          {/* Missed Parent Bonus */}
           <div className="bg-gradient-to-br from-orange-600 via-orange-700 to-amber-800 rounded-xl p-6 text-white shadow-xl hover:shadow-2xl transition-all duration-300">
             <div className="flex items-center justify-between mb-6">
               <div>
                 <p className="text-sm opacity-90 font-medium">
-                 2nd phase Missed Bonuses
+                  Missed Parent Bonus
                 </p>
                 <h3 className="text-2xl md:text-3xl font-bold mt-2">
-                  {formatCurrency(dashboardData.missedBonuses || 0)}
+                  {formatCurrency(dashboardData.missedParentBonus || 0)}
                 </h3>
               </div>
               <div className="p-3 bg-white/10 rounded-lg backdrop-blur-sm">
@@ -1230,16 +1252,16 @@ export default function SuperAdminDashboard() {
             </div>
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="opacity-75">Unpaid Parents</span>
+                <span className="opacity-75">Less than $4</span>
                 <span className="font-semibold">
-                  {dashboardData.missedBonusesCount || 0} Cases
+                  {dashboardData.missedParentBonusCount || 0} Txns
                 </span>
               </div>
               <div className="w-full bg-orange-500/30 rounded-full h-2">
                 <div
                   className="h-2 bg-white rounded-full transition-all duration-1000"
                   style={{
-                    width: `${Math.min((dashboardData.missedBonusesCount || 0) * 10, 100)}%`,
+                    width: `${Math.min((dashboardData.missedParentBonusCount || 0) * 10, 100)}%`,
                   }}
                 ></div>
               </div>

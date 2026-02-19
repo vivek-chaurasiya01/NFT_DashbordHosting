@@ -320,15 +320,13 @@ export default function RootWallet() {
         filtered = filtered.filter((tx) => tx.type === "Registration");
       } else if (activeCard === "Missed Parent Bonus") {
         filtered = filtered.filter(
-          (tx) =>
-            tx.type === "NFT Sale" &&
-            (tx.description?.includes("Company 40%") ||
-              tx.description?.includes("Company 30%") ||
-              tx.description?.toLowerCase().includes("missed") ||
-              tx.description?.toLowerCase().includes("parent not eligible")),
+          (tx) => tx.type === "NFT Sale" && tx.companyShare < 4,
+        );
+      } else if (activeCard === "NFT Sale") {
+        filtered = filtered.filter(
+          (tx) => tx.type === "NFT Sale" && tx.companyShare === 4,
         );
       } else if (activeCard === "Admin NFT") {
-        // Show admin NFT transactions (from Other type with NFT descriptions)
         filtered = filtered.filter(
           (tx) =>
             tx.type === "Other" &&
@@ -363,15 +361,13 @@ export default function RootWallet() {
     if (filterType !== "all") {
       if (filterType === "Missed Parent Bonus") {
         filtered = filtered.filter(
-          (tx) =>
-            tx.type === "NFT Sale" &&
-            (tx.description?.includes("Company 40%") ||
-              tx.description?.includes("Company 30%") ||
-              tx.description?.toLowerCase().includes("missed") ||
-              tx.description?.toLowerCase().includes("parent not eligible")),
+          (tx) => tx.type === "NFT Sale" && tx.companyShare < 4,
+        );
+      } else if (filterType === "NFT Sale") {
+        filtered = filtered.filter(
+          (tx) => tx.type === "NFT Sale" && tx.companyShare === 4,
         );
       } else if (filterType === "Admin NFT") {
-        // Show admin NFT transactions
         filtered = filtered.filter(
           (tx) =>
             tx.type === "Other" &&
@@ -443,28 +439,24 @@ export default function RootWallet() {
     );
   }, [transactions.transactions]);
 
-  // Missed Parent Bonus - 10% when parent not eligible
+  // Missed Parent Bonus - NFT Sale type with less than $4
   const missedParentBonusTransactions = useMemo(() => {
     return transactions.transactions.filter(
-      (tx) =>
-        tx.type === "NFT Sale" &&
-        (tx.description?.includes("Company 40%") ||
-          tx.description?.includes("Company 30%") ||
-          tx.description?.toLowerCase().includes("missed") ||
-          tx.description?.toLowerCase().includes("parent not eligible")),
+      (tx) => tx.type === "NFT Sale" && tx.companyShare < 4,
     );
   }, [transactions.transactions]);
 
   const nftSaleTransactions = useMemo(() => {
+    // NFT Sale - Only $4 transactions
     const nftTx = transactions.transactions.filter(
-      (tx) => tx.type === "NFT Sale",
+      (tx) => tx.type === "NFT Sale" && tx.companyShare === 4,
     );
-    console.log("NFT Sale transactions:", nftTx.length, nftTx);
+    console.log("NFT Sale ($4):", nftTx.length);
     return nftTx;
   }, [transactions.transactions]);
 
   const adminNftTransactions = useMemo(() => {
-    // Admin NFT transactions are in "Other" type with NFT-related descriptions
+    // Admin NFT - Other type with NFT descriptions (2nd Phase)
     const adminNfts = transactions.transactions.filter(
       (tx) =>
         tx.type === "Other" &&
@@ -472,11 +464,7 @@ export default function RootWallet() {
           tx.description?.toLowerCase().includes("admin nft") ||
           tx.description?.toLowerCase().includes("nft sale")),
     );
-    console.log(
-      "Admin NFT transactions from Other:",
-      adminNfts.length,
-      adminNfts,
-    );
+    console.log("Admin NFT (Other type):", adminNfts.length);
     return adminNfts;
   }, [transactions.transactions]);
 
