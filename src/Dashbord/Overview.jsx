@@ -106,6 +106,11 @@ export default function SuperAdminDashboard() {
       remaining: 0,
       percentageUsed: "0.00%"
     },
+    marketplaceNFTs: {
+      total: 0,
+      adminNFTs: 0,
+      userResoldNFTs: 0
+    },
   });
 
   const [loading, setLoading] = useState(true);
@@ -165,6 +170,13 @@ export default function SuperAdminDashboard() {
       name: "Trading Stats",
       endpoint: "/api/admin/trading-stats",
       key: "tradingStats",
+      method: "GET",
+      requiresAuth: false,
+    },
+    {
+      name: "NFT Marketplace",
+      endpoint: "/api/nft/marketplace",
+      key: "marketplace",
       method: "GET",
       requiresAuth: false,
     },
@@ -680,6 +692,11 @@ export default function SuperAdminDashboard() {
         totalSold: tradingStatsData.totalSold || 0,
         remaining: tradingStatsData.remaining || 0,
         percentageUsed: tradingStatsData.percentageUsed || "0.00%"
+      },
+      marketplaceNFTs: {
+        total: results.marketplace?.summary?.total || 0,
+        adminNFTs: results.marketplace?.summary?.adminNFTs || 0,
+        userResoldNFTs: results.marketplace?.summary?.userResoldNFTs || 0
       },
     };
   };
@@ -1300,6 +1317,42 @@ export default function SuperAdminDashboard() {
               </div>
               <p className="text-xs opacity-75 text-right">
                 {dashboardData.tradingStats.percentageUsed || "0.00%"} Used
+              </p>
+            </div>
+          </div>
+
+          {/* NFT Marketplace */}
+          <div className="bg-gradient-to-br from-cyan-600 via-cyan-700 to-blue-800 rounded-xl p-6 text-white shadow-xl hover:shadow-2xl transition-all duration-300">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <p className="text-sm opacity-90 font-medium">
+                  NFT Marketplace
+                </p>
+                <h3 className="text-2xl md:text-3xl font-bold mt-2">
+                  {formatNumber(dashboardData.marketplaceNFTs.total || 0)}
+                </h3>
+              </div>
+              <div className="p-3 bg-white/10 rounded-lg backdrop-blur-sm">
+                <FaShoppingCart className="text-2xl" />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span className="opacity-75">User Resold</span>
+                <span className="font-semibold">
+                  {formatNumber(dashboardData.marketplaceNFTs.userResoldNFTs || 0)}
+                </span>
+              </div>
+              <div className="w-full bg-cyan-500/30 rounded-full h-2">
+                <div
+                  className="h-2 bg-white rounded-full transition-all duration-1000"
+                  style={{
+                    width: `${dashboardData.marketplaceNFTs.total > 0 ? (dashboardData.marketplaceNFTs.userResoldNFTs / dashboardData.marketplaceNFTs.total) * 100 : 0}%`,
+                  }}
+                ></div>
+              </div>
+              <p className="text-xs opacity-75 text-right">
+                Available for Purchase
               </p>
             </div>
           </div>

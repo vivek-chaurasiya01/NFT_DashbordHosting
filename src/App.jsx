@@ -13,6 +13,9 @@ import ChangePassword from "./Dashbord/ChangePassword";
 import NFTTreeAnalysis from "./Dashbord/NFTTreeAnalysis";
 import Withdrawal from "./Dashbord/Withdrawal";
 import ScrollToTop from "./Dashbord/ScrollToTop";
+import NFTTransactions from "./Dashbord/NFTTransactions";
+import UserMarketplaceNFTs from "./Dashbord/UserMarketplaceNFTs";
+import Marketplace from "./Dashbord/Marketplace";
 // import APITesting from "./Dashbord/APITesting";
 
 export default function App() {
@@ -31,6 +34,9 @@ export default function App() {
           <Route path="contact-us" element={<ContactUs />} />
           <Route path="nft-admin" element={<NFTAdmin />} />
           <Route path="nft-tree-analysis" element={<NFTTreeAnalysis />} />
+          <Route path="nft-transactions" element={<NFTTransactions />} />
+          <Route path="user-marketplace-nfts" element={<UserMarketplaceNFTs />} />
+          <Route path="marketplace" element={<Marketplace />} />
           <Route path="withdrawal" element={<Withdrawal />} />
           <Route path="change-password" element={<ChangePassword />} />
           {/* <Route path="api-testing" element={<APITesting />} /> */}

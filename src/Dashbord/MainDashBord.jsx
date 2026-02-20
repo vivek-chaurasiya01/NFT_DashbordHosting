@@ -21,6 +21,9 @@ import {
   FaKey,
   FaSitemap,
   FaMoneyBillWave,
+  FaExchangeAlt,
+  FaStore,
+  FaShoppingBag,
 } from "react-icons/fa";
 import { FiMoon, FiSun } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -82,6 +85,9 @@ export default function MainDashBord() {
     if (path.includes("contact-us")) return "Contact Us";
     if (path.includes("nft-admin")) return "NFT Admin";
     if (path.includes("nft-tree-analysis")) return "NFT Tree Analysis";
+    if (path.includes("nft-transactions")) return "NFT Transactions";
+    if (path.includes("user-marketplace-nfts")) return "User Marketplace NFTs";
+    if (path.includes("marketplace")) return "Marketplace";
     if (path.includes("withdrawal")) return "Withdrawal";
     if (path.includes("change-password")) return "Change Password";
     if (path.includes("api-testing")) return "API Testing";
@@ -146,6 +152,9 @@ export default function MainDashBord() {
             ["Contact Us", "/Dashbord/contact-us", FaEnvelope],
             ["NFT Admin", "/Dashbord/nft-admin", FaGem],
             ["NFT Tree", "/Dashbord/nft-tree-analysis", FaSitemap],
+            ["NFT Transactions", "/Dashbord/nft-transactions", FaExchangeAlt],
+            ["User Marketplace", "/Dashbord/user-marketplace-nfts", FaStore],
+            ["Marketplace", "/Dashbord/marketplace", FaShoppingBag],
             ["Change Password", "/Dashbord/change-password", FaKey],
             ["Analytics", "/Dashbord/analytics", FaChartBar],
           ].map(([label, path, Icon]) => (
