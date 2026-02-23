@@ -133,16 +133,37 @@ export default function NotificationManagement() {
       const token = getAuthToken();
       const response = await fetch(`${API_URL}api/notifications/toggle/${id}`, {
         method: "PATCH",
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { 
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}` 
+        },
       });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
       const result = await response.json();
 
       if (result.success) {
-        Swal.fire({ icon: "success", title: "Success!", text: result.message, timer: 2000 });
+        Swal.fire({ 
+          icon: "success", 
+          title: "Success!", 
+          text: result.message, 
+          timer: 1500,
+          showConfirmButton: false 
+        });
         fetchAllNotifications();
+      } else {
+        throw new Error(result.message || "Failed to toggle notification");
       }
     } catch (error) {
-      Swal.fire({ icon: "error", title: "Failed", text: "Failed to toggle notification" });
+      console.error("Toggle error:", error);
+      Swal.fire({ 
+        icon: "error", 
+        title: "Failed", 
+        text: error.message || "Failed to toggle notification" 
+      });
     }
   };
 
