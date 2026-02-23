@@ -16,6 +16,7 @@ import ScrollToTop from "./Dashbord/ScrollToTop";
 import NFTTransactions from "./Dashbord/NFTTransactions";
 import UserMarketplaceNFTs from "./Dashbord/UserMarketplaceNFTs";
 import Marketplace from "./Dashbord/Marketplace";
+import NotificationManagement from "./Dashbord/NotificationManagement";
 // import APITesting from "./Dashbord/APITesting";
 
 export default function App() {
@@ -37,6 +38,7 @@ export default function App() {
           <Route path="nft-transactions" element={<NFTTransactions />} />
           <Route path="user-marketplace-nfts" element={<UserMarketplaceNFTs />} />
           <Route path="marketplace" element={<Marketplace />} />
+          <Route path="notifications" element={<NotificationManagement />} />
           <Route path="withdrawal" element={<Withdrawal />} />
           <Route path="change-password" element={<ChangePassword />} />
           {/* <Route path="api-testing" element={<APITesting />} /> */}
